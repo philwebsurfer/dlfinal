@@ -1,0 +1,192 @@
+---
+title: "Muestreo de Gibbs para la Estación Camarones"
+author: Jorge III Altamirano Astorga
+output:
+  html_document:
+    df_print: paged
+---
+
+Para imputar vamos a hacer una prueba con Stan. Que técnicamente no pudimos ejecutar en Python, por problemas con el compilador de C++.
+
+En el caso de RStan, utilizamos una imagen de docker en donde sí se ejecutó sin problemas.
+
+```{r include=FALSE}
+library(rstan)
+options(mc.cores = parallel::detectCores())
+rstan_options(auto_write = TRUE)
+library(arrow)
+library(tidyverse)
+library(patchwork)
+```
+
+
+# Imputar los datos de PM10
+
+Leemos los datos de Python, para lo cual utilizamos Parquet del paquete Apache Arrow:
+
+```{r}
+camarones_train <- read_parquet("data/camarones_train.parquet")
+camarones_train <- camarones_train[
+  complete.cases(
+    camarones_train %>% 
+      select(matches("_PM10"))
+    ), ]
+camarones_test <- read_parquet("data/camarones_test.parquet")
+print("Tienen las mismas dimensiones:")
+print(paste("Registros en el set de entrenamiento: ",
+            nrow(camarones_train)))
+print(paste("Registros en el set de pruebas: ",
+            nrow(camarones_test)))
+```
+
+
+```{r}
+ggplot(camarones_test, aes(sample = Camarones_PM10)) +
+  geom_qq(distribution = stats::qpois, 
+          dparams = list(
+            lambda = camarones_test %>% pull(Camarones_PM10) %>% median),
+          na.rm = T) +
+  ggplot(camarones_test, aes(x = Camarones_PM10)) +
+  geom_histogram(binwidth = 10)
+```
+
+## Modelo Normal
+
+$$
+Y \sim Poi(\mu)\\
+\mu = exp[\alpha + \beta X]\\
+\ell = (y | \mu) \\
+\alpha \sim Normal(a, b) \\
+\beta \sim Normal(a, b)
+$$
+
+```{r}
+X <- camarones_train %>% 
+  select(matches("(Merced|Tlalnepantla)_PM10")) %>%
+  as.matrix
+X_test <- camarones_test %>% 
+  select(matches("(Merced|Tlalnepantla)_PM10")) %>%
+  as.matrix
+y <- camarones_train %>% pull("Camarones_PM10")
+y_test <- camarones_test %>% pull("Camarones_PM10")
+y <- y[complete.cases(X)]
+y_test <- y_test[complete.cases(X_test)]
+X <- X[complete.cases(X),]
+X_test <- X_test[complete.cases(X_test),]
+datos <- list(a = 0,
+              b = 100,
+              n = nrow(X),
+              p = ncol(X),
+              x = X,
+              y = y)
+fit <- stan(file = 'imputaciones/normal-pm10.stan', data = datos, 
+            iter = 3000, warmup = 500, chains = 4, init = 0)
+```
+
+
+```{r}
+yhat_names <- names(fit)
+yhat <- fit %>%
+  get_posterior_mean %>%
+  as_tibble %>%
+  add_column(name = yhat_names,
+             .before = "mean-chain:1")
+yhat 
+```
+
+```{r}
+yhat <- yhat %>% 
+  select("name", "mean-all chains") %>%
+  filter(str_detect(name, "^yhat")) 
+yhat %>%
+  head(5)
+```
+
+```{r}
+yhat %>%
+  # pull("mean-all chains") %>%
+  write_parquet("data/camarones_train_yhat-stan.parquet")
+```
+
+### Predicciones sobre el Set de Pruebas
+
+Código de Stan:
+
+```{bash}
+cat imputaciones/normal-pm10.stan
+```
+
+
+```{r}
+fitted_params <- fit %>%
+  rstan::extract()
+# Function for simulating y based on new x
+gen_quant_r <- function(x, fitted_params) {
+  linear_combination <- 
+    sample(fitted_params$alpha, size = length(x)) %>% 
+    matrix(., ncol = 2) +
+    sample(fitted_params$beta, size = length(x)) %>% 
+    matrix(., ncol = 2) * x
+  probs <- 1/(1 + exp(-linear_combination))
+  
+  
+  out <- rnbinom(n = nrow(x), prob = probs, size = max(y))
+  return(out)
+}
+set.seed(175904)
+y_pred_r <- gen_quant_r(X_test, fitted_params)
+y_pred_r %>% length
+```
+
+
+
+```{r}
+mean(y_pred_r == y_test)
+(sum((y_pred_r - y_test)^2))/length(y_test)
+```
+
+
+### Evaluación
+
+```{r}
+yhat %>% ggplot() +
+  geom_point(aes(x=1:nrow(yhat), 
+                 y=y, 
+                 colour="y ground truth"), alpha=0.3) +
+  geom_point(aes(x=1:nrow(yhat), 
+                 y=yhat %>% 
+                   pull("mean-all chains"), 
+                 colour="yhat"), alpha=0.3) +
+  labs(x = "Observaciones", y = "PM10 (ppm)")
+```
+```{r}
+tibble(x = 1:length(y_test),
+       y_test = y_test, 
+       y_test_hat = y_pred_r) %>%
+  ggplot(.) +
+  geom_point(aes(x=x, 
+                 y=y_test, 
+                 colour="y test ground truth"), alpha=0.3) +
+  geom_point(aes(x=x, 
+                 y=y_test_hat, 
+                 colour="y test hat "), alpha=0.3) +
+  labs(x = "Observaciones", y = "PM10 (ppm)")
+```
+
+## Gamma
+
+```{r}
+datos <- list(a = 1e-1,
+              b = 1e-1,
+              n = nrow(X),
+              p = ncol(X),
+              x = X,
+              y = y)
+fit <- stan(file = 'imputaciones/gamma-pm10.stan', data = datos, 
+            iter = 3000, warmup = 500, chains = 4)
+
+```
+
+# Bibliografía
+
+* [Yanai, Yuki. Research Methods in Political Science II: Day 5 Poisson Model. 2016.](https://yukiyanai.github.io/teaching/rm2-2016/contents/R/rm2-Poisson.html)
