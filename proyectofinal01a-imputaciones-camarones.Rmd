@@ -145,6 +145,16 @@ mean(y_pred_r == y_test)
 (sum((y_pred_r - y_test)^2))/length(y_test)
 ```
 
+```{r}
+tibble(`mean-all chains` = y_pred_r) %>%
+  write_parquet("data/camarones_test_yhat-stan.parquet")
+```
+
+```{r}
+yhat %>%
+  as.tibble(`mean-all chains` = yhat)
+```
+
 
 ### Evaluación
 
@@ -173,19 +183,7 @@ tibble(x = 1:length(y_test),
   labs(x = "Observaciones", y = "PM10 (ppm)")
 ```
 
-## Gamma
 
-```{r}
-datos <- list(a = 1e-1,
-              b = 1e-1,
-              n = nrow(X),
-              p = ncol(X),
-              x = X,
-              y = y)
-fit <- stan(file = 'imputaciones/gamma-pm10.stan', data = datos, 
-            iter = 3000, warmup = 500, chains = 4)
-
-```
 
 # Bibliografía
 
