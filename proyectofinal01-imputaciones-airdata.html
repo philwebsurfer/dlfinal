@@ -14272,7 +14272,8 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Proyecto-Final:-Redes-Neuronales.-Secuencias.">Proyecto Final: Redes Neuronales. Secuencias.<a class="anchor-link" href="#Proyecto-Final:-Redes-Neuronales.-Secuencias.">&#182;</a></h1><p>En la siguiente sección vamos a tratar los datos como secuenciales, para lo cual seguiremos los siguientes pasos.</p>
+<h1 id="Proyecto-Final:-Imputaciones-de-los-Datos-del-Sensor.">Proyecto Final: Imputaciones de los Datos del Sensor.<a class="anchor-link" href="#Proyecto-Final:-Imputaciones-de-los-Datos-del-Sensor.">&#182;</a></h1><p>Los datos del sensor se pueden procesar de manera secuencial. Como una serie de tiempo.</p>
+<p>Dado que no tenemos todos los datos, es decir, hay faltantes debido a lo que se describe a continuación, vamos a ver cómo imputar datos de la mejor manera, y así evitar estos "huecos" en nuestras observaciones.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14859,7 +14860,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759833525717)&gt;</pre>
+<pre>&lt;ggplot: (8789789878077)&gt;</pre>
 </div>
 
 </div>
@@ -15255,7 +15256,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832933869)&gt;</pre>
+<pre>&lt;ggplot: (8789789279977)&gt;</pre>
 </div>
 
 </div>
@@ -16962,7 +16963,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832934901)&gt;</pre>
+<pre>&lt;ggplot: (8789789327509)&gt;</pre>
 </div>
 
 </div>
@@ -17031,7 +17032,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832886233)&gt;</pre>
+<pre>&lt;ggplot: (8789789258013)&gt;</pre>
 </div>
 
 </div>
@@ -17100,7 +17101,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832899253)&gt;</pre>
+<pre>&lt;ggplot: (8789789232785)&gt;</pre>
 </div>
 
 </div>
@@ -17169,7 +17170,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832829745)&gt;</pre>
+<pre>&lt;ggplot: (8789789179185)&gt;</pre>
 </div>
 
 </div>
@@ -17238,7 +17239,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832933833)&gt;</pre>
+<pre>&lt;ggplot: (8789789178333)&gt;</pre>
 </div>
 
 </div>
@@ -17331,6 +17332,8 @@ a.anchor-link {
         <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">v</span><span class="p">])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">])</span>
         <span class="n">sd</span> <span class="o">=</span> <span class="mf">0.7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">df_prev</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
         <span class="n">rnds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="o">-</span><span class="n">sd</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]))</span>
+        <span class="c1">#rnds = np.random.uniform(-2*np.pi, 2*np.pi, len(out[&quot;datetime&quot;]))</span>
+        <span class="c1">#rnds = np.cos(rnds) * sd</span>
         <span class="n">out</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">+</span> <span class="n">rnds</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>    
         <span class="c1">#out[v] = [m*j  b[v] + rnds[j-1] for j in i]</span>
         
@@ -17510,8 +17513,8 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 4.53 s, sys: 4.4 s, total: 8.93 s
-Wall time: 8.93 s
+<pre>CPU times: user 4.02 s, sys: 1.83 s, total: 5.85 s
+Wall time: 5.85 s
 </pre>
 </div>
 </div>
@@ -17586,7 +17589,7 @@ Wall time: 8.93 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832911681)&gt;</pre>
+<pre>&lt;ggplot: (8789789183709)&gt;</pre>
 </div>
 
 </div>
@@ -17656,7 +17659,7 @@ Wall time: 8.93 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832933797)&gt;</pre>
+<pre>&lt;ggplot: (8789788031969)&gt;</pre>
 </div>
 
 </div>
@@ -17726,7 +17729,7 @@ Wall time: 8.93 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759832838333)&gt;</pre>
+<pre>&lt;ggplot: (8789789261129)&gt;</pre>
 </div>
 
 </div>
@@ -17796,7 +17799,7 @@ Wall time: 8.93 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;ggplot: (8759831679925)&gt;</pre>
+<pre>&lt;ggplot: (8789789201393)&gt;</pre>
 </div>
 
 </div>
