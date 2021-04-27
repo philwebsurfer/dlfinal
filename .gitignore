@@ -134,3 +134,6 @@ dmypy.json
 *.pickle.gz
 *.parquet
 *.rds
+
+# build automation
+README.sh
