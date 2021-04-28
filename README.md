@@ -7,3 +7,5 @@
 * <https://philwebsurfer.github.io/dlfinal/proyectofinal01a-imputaciones-camarones.html>
 * <https://philwebsurfer.github.io/dlfinal/proyectofinal01-imputaciones-airdata.html>
 * <https://philwebsurfer.github.io/dlfinal/proyectofinal01-imputaciones-sinaica.html>
+* <https://philwebsurfer.github.io/dlfinal/proyectofinal02a-nn-secuencial.html>
+* <https://philwebsurfer.github.io/dlfinal/proyectofinal02b_rnn.html>
