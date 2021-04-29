@@ -2,6 +2,7 @@
 
 
 * [anteproyecto.html](https://philwebsurfer.github.io/dlfinal/anteproyecto.html)
+* [proyecto02b_rnn_v2.html](https://philwebsurfer.github.io/dlfinal/proyecto02b_rnn_v2.html)
 * [proyectofinal00-eda.html](https://philwebsurfer.github.io/dlfinal/proyectofinal00-eda.html)
 * [proyectofinal01a-imputaciones-camarones.html](https://philwebsurfer.github.io/dlfinal/proyectofinal01a-imputaciones-camarones.html)
 * [proyectofinal01-imputaciones-airdata.html](https://philwebsurfer.github.io/dlfinal/proyectofinal01-imputaciones-airdata.html)
