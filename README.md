@@ -1,4 +1,4 @@
-# Deep Leearning Final Exame
+# Deep Learning Examen Final
 
 
 * [anteproyecto.html](https://philwebsurfer.github.io/dlfinal/anteproyecto.html)
