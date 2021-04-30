@@ -8,7 +8,7 @@
 * proyectofinal01_imputaciones_sinaica [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal01_imputaciones_sinaica.html)
 * proyectofinal02a_lstm_secuencial [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02a_lstm_secuencial.html)
 * proyectofinal02a_rnn_secuencial [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02a_rnn_secuencial.html)
+* proyectofinal02b_lstm_secuencial [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02b_lstm_secuencial.html)
 * proyectofinal02b_rnn [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02b_rnn.html)
-* proyectofinal02b_secuencial_lstm [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02b_secuencial_lstm.html)
 * proyectofinal02c_lstm [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02c_lstm.html)
 * proyectofinal [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal.html)
