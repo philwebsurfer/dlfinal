@@ -1,7 +1,7 @@
 # Deep Learning Examen Final
 
 
-* anteproyecto [html](https://philwebsurfer.github.io/dlfinal/anteproyecto.html) [pdf](https://philwebsurfer.github.io/dlfinal/anteproyecto.pdf)
+* anteproyecto [html](https://philwebsurfer.github.io/dlfinal/anteproyecto.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/anteproyecto.pdf)
 * proyectofinal00_eda [html](https://philwebsurfer.github.io/dlfinal/proyectofinal00_eda.html)
 * proyectofinal01a_imputaciones_camarones [html](https://philwebsurfer.github.io/dlfinal/proyectofinal01a_imputaciones_camarones.html)
 * proyectofinal01_imputaciones_airdata [html](https://philwebsurfer.github.io/dlfinal/proyectofinal01_imputaciones_airdata.html)
