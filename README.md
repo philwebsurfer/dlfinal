@@ -11,4 +11,5 @@
 * proyectofinal02b_rnn [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02b_rnn.html)
 * proyectofinal02c_conv1d_secuencial [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02c_conv1d_secuencial.html)
 * proyectofinal02c_lstm [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02c_lstm.html)
+* proyectofinal02_secuencial [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02_secuencial.html)
 * proyectofinal [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal.html)
