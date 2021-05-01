@@ -137,3 +137,6 @@ dmypy.json
 
 # build automation
 README.sh
+
+# models and pickle/dill objects
+models/
