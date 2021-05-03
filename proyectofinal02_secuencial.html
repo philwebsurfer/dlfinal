@@ -14668,7 +14668,7 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">object_names</span> <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_time&quot;</span><span class="p">)]</span>
@@ -14688,7 +14688,7 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 <span class="n">perf_table</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;val_mse&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">]</span> <span class="o">//</span> <span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;m&quot;</span> <span class="o">+</span> \
 <span class="p">(</span><span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">]</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">2.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;s&quot;</span>
-<span class="n">perf_table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">perf_table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">perf_table</span> <span class="o">=</span> <span class="n">perf_table</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">perf_table</span> 
 </pre></div>
@@ -14706,7 +14706,7 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 
 
 
@@ -14729,7 +14729,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>index</th>
       <th>Modelo</th>
       <th>Tiempo</th>
       <th>val_mse</th>
@@ -14743,7 +14742,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>15</td>
       <td>model_conv00</td>
       <td>1m58.18s</td>
       <td>0.0209</td>
@@ -14755,7 +14753,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>model_rnn02</td>
       <td>7m34.56s</td>
       <td>0.0244</td>
@@ -14767,7 +14764,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>2</th>
-      <td>14</td>
       <td>model_lstm00</td>
       <td>9m39.10s</td>
       <td>0.0443</td>
@@ -14779,7 +14775,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>3</th>
-      <td>10</td>
       <td>model_lstm03</td>
       <td>9m11.55s</td>
       <td>0.0533</td>
@@ -14791,7 +14786,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
       <td>model_rnn01</td>
       <td>7m56.31s</td>
       <td>0.0566</td>
@@ -14803,7 +14797,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>5</th>
-      <td>13</td>
       <td>model_conv02</td>
       <td>6m34.26s</td>
       <td>0.0570</td>
@@ -14815,7 +14808,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>6</th>
-      <td>9</td>
       <td>model_lstm01</td>
       <td>1m40.80s</td>
       <td>0.0774</td>
@@ -14827,7 +14819,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>7</th>
-      <td>12</td>
       <td>model_conv03</td>
       <td>6m33.58s</td>
       <td>0.0796</td>
@@ -14839,7 +14830,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>8</th>
-      <td>11</td>
       <td>model_conv01</td>
       <td>14m3.57s</td>
       <td>0.0812</td>
@@ -14851,7 +14841,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>9</th>
-      <td>7</td>
       <td>model_dnn02</td>
       <td>2m9.07s</td>
       <td>0.0974</td>
@@ -14863,7 +14852,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>10</th>
-      <td>2</td>
       <td>model_dnn00</td>
       <td>1m15.81s</td>
       <td>0.1583</td>
@@ -14875,7 +14863,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>11</th>
-      <td>5</td>
       <td>model_rnn00</td>
       <td>7m37.76s</td>
       <td>0.1625</td>
@@ -14887,7 +14874,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>12</th>
-      <td>6</td>
       <td>model_dnn01</td>
       <td>1m13.96s</td>
       <td>0.2501</td>
@@ -14899,7 +14885,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>13</th>
-      <td>8</td>
       <td>model_lstm02</td>
       <td>9m11.20s</td>
       <td>0.5298</td>
@@ -14911,7 +14896,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>14</th>
-      <td>3</td>
       <td>model_rnn03</td>
       <td>7m32.10s</td>
       <td>1.5727</td>
@@ -14923,7 +14907,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
     </tr>
     <tr>
       <th>15</th>
-      <td>4</td>
       <td>model_dnn03</td>
       <td>2m8.56s</td>
       <td>4.7755</td>
