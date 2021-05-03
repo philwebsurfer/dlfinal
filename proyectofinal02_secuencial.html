@@ -14320,6 +14320,8 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">display_markdown</span><span class="p">,</span> <span class="n">Markdown</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 </pre></div>
 
      </div>
@@ -14668,7 +14670,7 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">object_names</span> <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_time&quot;</span><span class="p">)]</span>
@@ -14706,7 +14708,7 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
@@ -14921,6 +14923,74 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 </div>
 </div>
 
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">airdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;data/airdata/air-imputated.pickle.gz&quot;</span><span class="p">)</span>
+<span class="n">excluded_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;iaqAccuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="s2">&quot;datetime-1&quot;</span><span class="p">,</span> <span class="s2">&quot;delta&quot;</span><span class="p">,</span> 
+                    <span class="s2">&quot;imputated&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">airdata</span><span class="p">[[</span><span class="n">x</span> 
+                                        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">airdata</span><span class="o">.</span><span class="n">columns</span> 
+                                        <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">excluded_columns</span><span class="p">]],</span> 
+                               <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">175904</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">scaler_iaq</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">scaler_fiaq</span> <span class="o">=</span> <span class="n">scaler_iaq</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">[[</span><span class="s2">&quot;IAQ&quot;</span><span class="p">]])</span>
+<span class="n">perf_data_iaq</span> <span class="o">=</span> <span class="n">scaler_fiaq</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">perf_table</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">))</span>
+<span class="n">scaler_gr</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">scaler_fgr</span> <span class="o">=</span> <span class="n">scaler_gr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">[[</span><span class="s2">&quot;gasResistance&quot;</span><span class="p">]])</span>
+<span class="n">perf_data_gr</span> <span class="o">=</span> <span class="n">scaler_f</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">perf_table</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">))</span>
+<span class="n">perf_data_iaq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">perf_data_iaq</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">perf_table</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">perf_data_gr</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">perf_data_gr</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">perf_table</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">perf_data_iaq</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Tiempo&quot;</span><span class="p">,</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">],</span> <span class="p">)</span>
+<span class="n">perf_data_gr</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Tiempo&quot;</span><span class="p">,</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">],</span> <span class="p">)</span>
+<span class="n">perf_data_iaq</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">],</span> <span class="p">)</span>
+<span class="n">perf_data_gr</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">],</span> <span class="p">)</span>
+<span class="n">model_number_rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[^0-9]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">]]</span>
+<span class="n">is_gr_row</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">model_number_rows</span><span class="p">]</span>
+<span class="n">is_iaq_row</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">model_number_rows</span><span class="p">]</span>
+<span class="n">perf_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">is_gr_row</span><span class="p">]</span> <span class="o">=</span> <span class="n">perf_data_gr</span>
+<span class="n">perf_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">is_iaq_row</span><span class="p">]</span> <span class="o">=</span> <span class="n">perf_data_iaq</span>
+<span class="n">perf_table</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-6-c3f6af4869da&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     11</span> scaler_gr <span class="ansi-blue-fg">=</span> MinMaxScaler<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> scaler_fgr <span class="ansi-blue-fg">=</span> scaler_gr<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>train<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;gasResistance&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 13</span><span class="ansi-red-fg"> </span>perf_data_gr <span class="ansi-blue-fg">=</span> scaler_f<span class="ansi-blue-fg">.</span>inverse_transform<span class="ansi-blue-fg">(</span>perf_table<span class="ansi-blue-fg">.</span>select_dtypes<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;float64&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span> perf_data_iaq <span class="ansi-blue-fg">=</span> pd<span class="ansi-blue-fg">.</span>DataFrame<span class="ansi-blue-fg">(</span>perf_data_iaq<span class="ansi-blue-fg">,</span> columns<span class="ansi-blue-fg">=</span>perf_table<span class="ansi-blue-fg">.</span>select_dtypes<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;float64&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>columns<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> perf_data_gr  <span class="ansi-blue-fg">=</span> pd<span class="ansi-blue-fg">.</span>DataFrame<span class="ansi-blue-fg">(</span>perf_data_gr<span class="ansi-blue-fg">,</span> columns<span class="ansi-blue-fg">=</span>perf_table<span class="ansi-blue-fg">.</span>select_dtypes<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;float64&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>columns<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler_f&#39; is not defined</pre>
+</div>
 </div>
 
 </div>
