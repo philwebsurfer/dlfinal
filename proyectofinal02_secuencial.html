@@ -14939,7 +14939,7 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">airdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;data/airdata/air-imputated.pickle.gz&quot;</span><span class="p">)</span>
@@ -14961,14 +14961,14 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 <span class="n">perf_data_gr</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>  <span class="s2">&quot;Tiempo&quot;</span><span class="p">,</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">],</span> <span class="p">)</span>
 <span class="n">perf_data_iaq</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">],</span> <span class="p">)</span>
 <span class="n">perf_data_gr</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>  <span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">],</span> <span class="p">)</span>
+<span class="n">perf_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;val_mse&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">perf_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">model_number_rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[^0-9]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perf_table</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">]]</span>
 <span class="n">is_gr_row</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">model_number_rows</span><span class="p">]</span>
 <span class="n">is_iaq_row</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">model_number_rows</span><span class="p">]</span>
 <span class="n">perf_data</span> <span class="o">=</span> <span class="n">perf_table</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">perf_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">is_gr_row</span><span class="p">]</span> <span class="o">=</span> <span class="n">perf_data_gr</span>
 <span class="n">perf_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">is_iaq_row</span><span class="p">]</span> <span class="o">=</span> <span class="n">perf_data_iaq</span>
-<span class="n">perf_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;val_mse&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">perf_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;Tiempo&quot;</span><span class="p">,</span> <span class="s2">&quot;val_mae&quot;</span><span class="p">,</span> <span class="s2">&quot;mae&quot;</span><span class="p">]</span>
 <span class="n">perf_data</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)[</span><span class="n">cols</span><span class="p">]</span>
 </pre></div>
@@ -14986,7 +14986,276 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>Tiempo</th>
+      <th>val_mae</th>
+      <th>mae</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>model_conv01</td>
+      <td>14m3.57s</td>
+      <td>62.76</td>
+      <td>62.73</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>model_rnn02</td>
+      <td>7m34.56s</td>
+      <td>278464.95</td>
+      <td>94378.17</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>model_dnn02</td>
+      <td>2m9.07s</td>
+      <td>389361.53</td>
+      <td>155390.62</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>model_conv03</td>
+      <td>6m33.58s</td>
+      <td>86.19</td>
+      <td>21.43</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>model_rnn01</td>
+      <td>7m56.31s</td>
+      <td>87.76</td>
+      <td>21.71</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>model_conv02</td>
+      <td>6m34.26s</td>
+      <td>462670.17</td>
+      <td>99434.24</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>model_lstm03</td>
+      <td>9m11.55s</td>
+      <td>125.40</td>
+      <td>5.02</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>model_conv00</td>
+      <td>1m58.18s</td>
+      <td>562718.75</td>
+      <td>98426.28</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>model_lstm00</td>
+      <td>9m39.10s</td>
+      <td>569305.27</td>
+      <td>99731.48</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>model_lstm02</td>
+      <td>9m11.20s</td>
+      <td>570467.78</td>
+      <td>314248.42</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>model_dnn00</td>
+      <td>1m15.81s</td>
+      <td>589039.62</td>
+      <td>317796.11</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>model_rnn00</td>
+      <td>7m37.76s</td>
+      <td>617843.41</td>
+      <td>426592.04</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>model_dnn01</td>
+      <td>1m13.96s</td>
+      <td>192.35</td>
+      <td>122.84</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>model_lstm01</td>
+      <td>1m40.80s</td>
+      <td>249.66</td>
+      <td>122.24</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>model_rnn03</td>
+      <td>7m32.10s</td>
+      <td>464.77</td>
+      <td>76.45</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>model_dnn03</td>
+      <td>2m8.56s</td>
+      <td>949.37</td>
+      <td>49.54</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Es importante notar que los modelos con números pares y el 0, como model_MMMM00, son para la variable <code>gasResistance</code>. La cual tiene un rango de valores de la siguiente manera:</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min gasResistance: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;gasResistance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">; &quot;</span> <span class="o">+</span> \
+<span class="sa">f</span><span class="s2">&quot;max gasResistance: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;gasResistance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/markdown">
+<p>min gasResistance: 76,404.00; max gasResistance: 2,434,389.00</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Para los modelos con números ipares, como model_MMMM03, son para la variable <code>IAQ</code>. La cual tiene un rango de valores de la siguiente manera:</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min IAQ: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;IAQ&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">; &quot;</span> <span class="o">+</span> \
+<span class="sa">f</span><span class="s2">&quot;max IAQ: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;IAQ&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/markdown">
+<p>min IAQ: 0.00; max IAQ: 500.00</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Recordando que tenemos que realmente lo que queremos saber es la escala internacional IAQ, mostraremos los modelos IAQ.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">perf_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">is_iaq_row</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="n">cols</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
 
 
 
@@ -15071,275 +15340,6 @@ Esta es la métrica que utilizamos para ajustar el backprop.</p>
       <td>2m8.56s</td>
       <td>949.37</td>
       <td>49.54</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>model_rnn02</td>
-      <td>7m34.56s</td>
-      <td>278464.95</td>
-      <td>94378.17</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>model_dnn02</td>
-      <td>2m9.07s</td>
-      <td>389361.53</td>
-      <td>155390.62</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>model_conv02</td>
-      <td>6m34.26s</td>
-      <td>462670.17</td>
-      <td>99434.24</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>model_conv00</td>
-      <td>1m58.18s</td>
-      <td>562718.75</td>
-      <td>98426.28</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>model_lstm00</td>
-      <td>9m39.10s</td>
-      <td>569305.27</td>
-      <td>99731.48</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>model_lstm02</td>
-      <td>9m11.20s</td>
-      <td>570467.78</td>
-      <td>314248.42</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>model_dnn00</td>
-      <td>1m15.81s</td>
-      <td>589039.62</td>
-      <td>317796.11</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>model_rnn00</td>
-      <td>7m37.76s</td>
-      <td>617843.41</td>
-      <td>426592.04</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Es importante notar que los modelos con números pares y el 0, como model_MMMM00, son para la variable <code>gasResistance</code>. La cual tiene un rango de valores de la siguiente manera:</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min gasResistance: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;gasResistance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">; &quot;</span> <span class="o">+</span> \
-<span class="sa">f</span><span class="s2">&quot;max gasResistance: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;gasResistance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/markdown">
-<p>min gasResistance: 76,404.00; max gasResistance: 2,434,389.00</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Para los modelos con números ipares, como model_MMMM03, son para la variable <code>IAQ</code>. La cual tiene un rango de valores de la siguiente manera:</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min IAQ: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;IAQ&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">; &quot;</span> <span class="o">+</span> \
-<span class="sa">f</span><span class="s2">&quot;max IAQ: </span><span class="si">{</span><span class="n">airdata</span><span class="p">[</span><span class="s1">&#39;IAQ&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">3,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/markdown">
-<p>min IAQ: 0.00; max IAQ: 500.00</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Recordando que tenemos que realmente lo que queremos saber es la escala internacional IAQ, mostraremos los modelos IAQ.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">perf_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">is_iaq_row</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="n">cols</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Modelo</th>
-      <th>Tiempo</th>
-      <th>val_mae</th>
-      <th>mae</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>model_conv01</td>
-      <td>14m3.57s</td>
-      <td>62.76</td>
-      <td>62.73</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>model_lstm03</td>
-      <td>9m11.55s</td>
-      <td>125.40</td>
-      <td>5.02</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>model_dnn01</td>
-      <td>1m13.96s</td>
-      <td>192.35</td>
-      <td>122.84</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>model_rnn03</td>
-      <td>7m32.10s</td>
-      <td>464.77</td>
-      <td>76.45</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>model_lstm00</td>
-      <td>9m39.10s</td>
-      <td>569305.27</td>
-      <td>99731.48</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>model_lstm02</td>
-      <td>9m11.20s</td>
-      <td>570467.78</td>
-      <td>314248.42</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>model_dnn00</td>
-      <td>1m15.81s</td>
-      <td>589039.62</td>
-      <td>317796.11</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>model_rnn00</td>
-      <td>7m37.76s</td>
-      <td>617843.41</td>
-      <td>426592.04</td>
     </tr>
   </tbody>
 </table>
