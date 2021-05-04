@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>proyectofinal02_secuencial</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script>
+<title>proyectofinal03_sensor-sinaica</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script>
 (function() {
   function addWidgetsRenderer() {
     var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
@@ -14295,7 +14295,7 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Proyecto-Final:-Selecci&#243;n-de-Modelo-para-los-datos-deL-sensor">Proyecto Final: Selecci&#243;n de Modelo para los datos deL sensor<a class="anchor-link" href="#Proyecto-Final:-Selecci&#243;n-de-Modelo-para-los-datos-deL-sensor">&#182;</a></h1><p><em>Jorge III Altamirano Astorga, Luz Aurora Hernández Martínez, Ita-Andehui Santiago Castillejos.</em></p>
+<h1 id="Proyecto-Final:-Selecci&#243;n-de-Modelo-en-Modo-Secuencial">Proyecto Final: Selecci&#243;n de Modelo en Modo Secuencial<a class="anchor-link" href="#Proyecto-Final:-Selecci&#243;n-de-Modelo-en-Modo-Secuencial">&#182;</a></h1><p><em>Jorge III Altamirano Astorga, Luz Aurora Hernández Martínez, Ita-Andehui Santiago Castillejos.</em></p>
 <p>Se realizaron pruebas de los 3 tipos de neuronas:</p>
 <ol>
 <li><p><a href="proyectofinal02d_dnn.html">DNN</a></p>
@@ -14380,6 +14380,149 @@ a.anchor-link {
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">airdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;data/airdata/air-imputated.pickle.gz&quot;</span><span class="p">)</span>
+<span class="n">airdata</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>datetime</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>datetime-1</th>
+      <th>delta</th>
+      <th>imputated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21.51</td>
+      <td>777.41</td>
+      <td>44.04</td>
+      <td>152149.0</td>
+      <td>34.7</td>
+      <td>1</td>
+      <td>2021-02-12 06:05:35.846304417</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>5</td>
+      <td>NaT</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21.51</td>
+      <td>777.41</td>
+      <td>43.98</td>
+      <td>152841.0</td>
+      <td>33.6</td>
+      <td>1</td>
+      <td>2021-02-12 06:05:38.837326527</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>5</td>
+      <td>2021-02-12 06:05:35.846304417</td>
+      <td>2.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.54</td>
+      <td>777.41</td>
+      <td>43.73</td>
+      <td>153259.0</td>
+      <td>31.5</td>
+      <td>1</td>
+      <td>2021-02-12 06:05:47.812360048</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>5</td>
+      <td>2021-02-12 06:05:38.837326527</td>
+      <td>8.0</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14388,7 +14531,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">models_plot</span><span class="p">(</span><span class="n">histories</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
