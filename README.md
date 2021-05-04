@@ -13,4 +13,5 @@
 * proyectofinal02c_lstm [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02c_lstm.html)
 * proyectofinal02d_dnn [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02d_dnn.html)
 * proyectofinal02_secuencial [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal02_secuencial.html)
+* proyectofinal03_sensor-sinaica [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal03_sensor-sinaica.html)
 * proyectofinal [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal.html)
