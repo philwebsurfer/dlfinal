@@ -14570,8 +14570,49 @@ a.anchor-link {
 <li><p>Nuestras pruebas con modelos de redes neuronales profundas y el procesamiento de señales.</p>
 </li>
 <li><p>Los inconvenientes que encontramos y la influencia que ejercieron sobre el presente proyecto.</p>
+<ul>
+<li><p>Que no tuviéramos todos los datos disponibles en el sitio de la SINAICA nos complicó muchísimo no poder tener más datos.</p>
+</li>
+<li><p>El algoritmo propietario (cerrado) para calcular la variable IAQ a partir del sensor de la resistencia eléctrica en el aire hizo que perdiéramos tiempo en probar cuál de las variables era más viable predecir.</p>
+</li>
+<li><p>Aunque <em>a caballo regalado no se le ve el diente</em>: Los tiempos y capacidades de Google Colab no son los mejores, aún con Pro (que es bastante económico). Además de que su velocidad de desempeño es aleatoria durante diferentes momentos.</p>
+</li>
+<li><p>Las fuentes externas no siempre son confiables, gratuitas o completas. Nos hubiera gustado tener una fuente de datos de clima gratuita y que fuera confiable.</p>
+</li>
+</ul>
 </li>
 <li><p>Aprendizajes obtenidos durante el presente.</p>
+<ul>
+<li><p>Nunca se debe subestimar la necesidad (y el tiempo que toma) de limpiar, explorar, imputar, "corregir" los datos.</p>
+</li>
+<li><p>Cualquier mejora en tiempos conlleva un reto, a veces grande; tal como vimos en los miniproyectos y se comentó en clase.</p>
+</li>
+<li><p>No podemos confiar en que el gobierno o un ente externo entregue los datos a tiempo. Entendimos que es importante tener desde la fundación de un proyecto al menos con el 70% de los datos disponibles, para empezar a trabajar con ellos.</p>
+</li>
+<li><p>Nunca subestimar las fuentes bibliográficas oficiales (en nuestro caso Keras y Tensorflow) como guías prácticas y bien escritas. Dado que muchas veces Stackoverlow no tiene las mejroes respuestas. [4], [5]</p>
+</li>
+<li><p>No tener miedo a aprender y a leer es vital para estar actualizado: pues muchas veces cambia mucho las APIs, nuevos "approaches".</p>
+</li>
+<li><p>Nos resultó muy útil tener un modelo baseline [5] que fue como una hipótesis nula, que nos permitió saber qué hacía un modelo vacío. Es bueno tener esta comparación y la rescatamos como valiosa.</p>
+</li>
+<li><p>Los detalles y el cuidado de estos son de suma importancia:</p>
+<p>i. Aprendimos que escalamos los datos, pero devolverlos a una escala real, es otra cosa.</p>
+<p>ii. Cuidar las semillas para hacer lo más reproducible es crítico.</p>
+<p>iii. En nuestro caso fue importante cuidar que ninguna manipulación (como el <code>train_test_split</code> no hiciera <code>shuffle</code> o barajeara el orden.</p>
+<p>iv. Es importante probar, probar y probar: alterando 1 solo detalle de la arquitectura, un hiperparámetro, una modificación de los datos, etc. Esto involucra hacer modelos constructivos, no hacerlos complejos desde un inicio.</p>
+</li>
+</ul>
+</li>
+<li><p>Siguientes pasos que nos surgieron:</p>
+<p>i. Tomar datos por al menos 1 año, para establecer más claramente la estacionalidad, incorporar (comprar) fuentes de datos del clima y contaminantes, tener más puntos de redundancia (no depender únicamente de 1 sensor en 1 sólo lugar).</p>
+<p>ii. Explorar mejores opciones para imputar datos secuenciales o series de tiempo.</p>
+<p>iii. Realizar más pruebas sobre las predicciones y ver cómo van las mediciones.</p>
+<p>iv. Hacer las pruebas con mayor capacidad de cómputo: tener ventanas más grandes en <code>timeseries_dataset_from_array</code>. Que se nos ocurría extender o reescribir esta función de Keras promediando por ejemplo a 1 min, en vez de estar probando.</p>
+<p>v. Realizar más <em>Hyperparameter Tuning</em> (Learning Rate, combinar optimizadores en los modelos), buscar datos preentrenados, o entrenar la red con datos como el del ejemplo (del Departamento de Biogeoquímica del Instituto Max-Planck) [4] [5].</p>
+<p>vi. Hacer un tablero o que las predicciones sean predecibles por algún API.</p>
+<p>vii. Realizar predicciones con algún intervalo de confianza o grado de certidumbre de la predicción.</p>
+<p>viii. Mejorar el desempeño, que claramente no es el mejor.</p>
+<p>ix. Venderlo o publicarlo en algún journal.</p>
 </li>
 </ul>
 
@@ -14585,6 +14626,10 @@ a.anchor-link {
 <li><p>[2] <a href="https://community.bosch-sensortec.com/t5/MEMS-sensors-forum/BME680-IAQ-accuracy-definition/m-p/5931/highlight/true#M10">Bosch SensorTec Comunity | Solution to IAQ accuracy definition</a>.</p>
 </li>
 <li><p>[3] <a href="https://github.com/ohmtech-io/uThingVOC/blob/f345fdbef6a4fd0da77289b436e3c478706572a2/Src/main.c#L139">GitHub | Daniel Mancuso: Código fuente de OhmTech-io/uThingVOC Src/main.c</a></p>
+</li>
+<li><p>[4] Keras contributors et al. <a href="https://keras.io/examples/timeseries/timeseries_weather_forecasting/">Keras / Code examples / Timeseries / Timeseries forecasting for weather prediction</a>. 2021.</p>
+</li>
+<li><p>[5] Tensorflow Contributors. <a href="https://www.tensorflow.org/tutorials/structured_data/time_serieshttps://www.tensorflow.org/tutorials/structured_data/time_series">Tensorflow: Tutorial on Time series forecastingTime series forecasting</a>. 2021.</p>
 </li>
 <li><p><a href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme680-ds001.pdf">Bosch BME680 Datasheet</a>. 2021.</p>
 </li>
@@ -14609,10 +14654,6 @@ a.anchor-link {
 <li><p>Román-Rangel, Francisco. Notas y Código del Curso de Aprendizaje Profundo. 2021.</p>
 </li>
 <li><p>González-Pérez, Felipe. <a href="https://lucid-torvalds-517e78.netlify.app/">Notas de aprendizaje de máquina</a>. 2020.</p>
-</li>
-<li><p>Keras contributors et al. <a href="https://keras.io/examples/timeseries/timeseries_weather_forecasting/">Keras / Code examples / Timeseries / Timeseries forecasting for weather prediction</a>. 2021.</p>
-</li>
-<li><p>Tensorflow Contributors. <a href="https://www.tensorflow.org/tutorials/structured_data/time_serieshttps://www.tensorflow.org/tutorials/structured_data/time_series">Tensorflow: Tutorial on Time series forecastingTime series forecasting</a>. 2021.</p>
 </li>
 <li><p>Mohd, Faizy. <a href="https://ai.stackexchange.com/a/10449">StackOverflow AI: How to use CNN for making predictions on non-image data?</a>. 2021.</p>
 </li>
