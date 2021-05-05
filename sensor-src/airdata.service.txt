@@ -1,0 +1,12 @@
+[Unit]
+Description=airQualityDaemon
+After=network.target
+[Service]
+ExecStart=/usr/bin/env  /usr/local/bin/airdata.py
+WorkingDirectory=/var/lib/airdata
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+[Install]
+WantedBy=multi-user.target
