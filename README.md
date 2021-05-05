@@ -16,4 +16,5 @@
 * proyectofinal03c_lstm_sinaica [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal03c_lstm_sinaica.html)
 * proyectofinal03d_conv1d_sinaica [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal03d_conv1d_sinaica.html)
 * proyectofinal03_sensor-sinaica [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal03_sensor-sinaica.html)
-* proyectofinal [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal.html)
+* proyectofinal04_mejora_modelo [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal04_mejora_modelo.html)
+* proyectofinal [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/proyectofinal.pdf)
