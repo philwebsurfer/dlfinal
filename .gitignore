@@ -136,7 +136,7 @@ dmypy.json
 *.rds
 
 # build automation
-README.sh
+#README.sh
 
 # models and pickle/dill objects
 models/
