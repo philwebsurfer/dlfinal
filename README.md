@@ -1,4 +1,4 @@
-# Deep Learning Examen Final: Estudio de Contaminantes en Interior y la Influencia de Facotres Exteriores.
+# Deep Learning Examen Final: Calidad del Aire en Interior.
 
 _Jorge III Altamirano-Astorga, Luz Aurora Hernández-Martínez, Ita-Andehui Santiago-Castillejos._
 
