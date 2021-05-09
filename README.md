@@ -1,4 +1,10 @@
-# Deep Learning Examen Final
+# Deep Learning Examen Final: Estudio de Contaminantes en Interior y la Influencia de Facotres Exteriores.
+
+_Jorge III Altamirano-Astorga, Luz Aurora Hernández-Martínez, Ita-Andehui Santiago-Castillejos._
+
+_Profesor: Dr. Edgar Francisco Román-Rangel._
+
+
 
 
 * anteproyecto [[html]](https://philwebsurfer.github.io/dlfinal/anteproyecto.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/anteproyecto.pdf)
