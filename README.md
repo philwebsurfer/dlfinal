@@ -9,6 +9,8 @@ _Profesor: Dr. Edgar Francisco Román-Rangel._
 
 * anteproyecto [[html]](https://philwebsurfer.github.io/dlfinal/anteproyecto.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/anteproyecto.pdf)
 
+* investigación [[pdf]](https://philwebsurfer.github.io/dlfinal/investigacion.pdf)
+
 * presentacion [[pdf]](https://philwebsurfer.github.io/dlfinal/presentacion.pdf)
 
 * proyectofinal [[html]](https://philwebsurfer.github.io/dlfinal/proyectofinal.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/proyectofinal.pdf)
