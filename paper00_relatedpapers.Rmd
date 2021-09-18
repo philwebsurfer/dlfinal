@@ -1,0 +1,45 @@
+---
+title: "Related Papers"
+author: Jorge III Altamirano-Astorga, Ita-Andehui Santiago-Castillejos, Luz Aurora
+  Hernández-Martínez
+output:
+  bookdown::html_document2: default
+  toc: true
+bibliography: paper00_relatedpapers.bib
+biblio-style: "apalike"
+link-citations: yes
+nocite: '@*'
+---
+
+# Common Issues {-}
+
+We have read all the listed [references] and found a common issue along all of them:
+
+1. All artificial neural nets are based on perceptron-based architecture, but one that uses LSTM [@deepair]. None of the papers state clearly the architecture.
+
+2. All use, mainly MATLAB. Instead of 
+Keras ^[https://keras.io] ,
+Tensorflow ^[https://www.tensorflow.org/] ,
+scikit-learn ^[https://scikit-learn.org/stable/modules/classes.html#module-sklearn.neural_network]
+or PyTorch ^[https://pytorch.org/] . 
+
+3. We did not find any code or data published, but it is possible to be available upon request. This is a big issue for reproducibility and replicability.
+
+4. We didn't find any outstanding results for predicting any weather or polution in any of the papers cited.
+
+It is natural to build and improve upon these weaknesses and address them. Therefore, we may have a great chance of having our paper published in a peer-reviewed journal.
+
+# Common Points {-}
+
+1. Most relevant papers in the computer science field are published by the IEEE ^[Institute of Electrical and Electronics Engineers]. Those that focus on the environmental field tend to be published in Environmental and Polution Conferences.
+
+2. Regulatory bodies play an important part of the polution and environmental papers. E.g., EPA ^[U.S. Environmental Protection Agency] , ANSI ^[American National Standards Institute] , ..
+
+3. Most of the papers are published by universities and non-for-profit organizations.
+
+4. Surprisingly, many articles come from Asia (Hong Kong, Malaysia, India) and the U.S. entities prominently regulate and are a references from a compliance and safety levels standpoint.
+
+# References {-}
+
+<div id="refs"></div>
+
