@@ -127,7 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# R Project-related files
 .Rproj.user
+.Rhistory
+.RData
 
 # No pickles, no parquets
 *.pickle
