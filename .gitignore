@@ -145,3 +145,4 @@ dmypy.json
 # models and pickle/dill objects
 models/
 models-sinaica/
+related-*/
