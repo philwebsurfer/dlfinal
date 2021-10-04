@@ -8,4 +8,6 @@ _Profesor: Dr. Edgar Francisco Román-Rangel._
 
 * Related Papers [[html]](https://philwebsurfer.github.io/dlfinal/paper00_relatedpapers.html)
 
+* Paper [[html]](https://philwebsurfer.github.io/dlfinal/paper)
+
 # [Final Exam](https://philwebsurfer.github.io/dlfinal/examen)
