@@ -146,3 +146,6 @@ dmypy.json
 models/
 models-sinaica/
 related-*/
+
+# OpenWeatherMap Data
+2f101ea00e7759ea8723b848ac8b18d0.csv
