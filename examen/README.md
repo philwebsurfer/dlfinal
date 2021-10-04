@@ -4,13 +4,9 @@ _Jorge III Altamirano-Astorga, Luz Aurora Hernández-Martínez, Ita-Andehui Sant
 
 _Profesor: Dr. Edgar Francisco Román-Rangel._
 
-# Paper
-
-* Related Papers [[html]](https://philwebsurfer.github.io/dlfinal/paper00_relatedpapers.html)
-
 # Final Exam
 
-* anteproyecto [[html]](https://philwebsurfer.github.io/dlfinal/anteproyecto.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/anteproyecto.pdf)
+* anteproyecto [[html]](https://philwebsurfer.github.io/dlfinal/examen/anteproyecto.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/anteproyecto.pdf)
 
 * investigación [[pdf]](https://philwebsurfer.github.io/dlfinal/investigacion.pdf)
 
