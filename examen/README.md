@@ -6,7 +6,7 @@ _Profesor: Dr. Edgar Francisco Román-Rangel._
 
 # Final Exam
 
-* anteproyecto [[html]](https://philwebsurfer.github.io/dlfinal/examen/anteproyecto.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/anteproyecto.pdf)
+* anteproyecto [[html]](https://philwebsurfer.github.io/dlfinal/examen/anteproyecto.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/examen/anteproyecto.pdf)
 
 * investigación [[pdf]](https://philwebsurfer.github.io/dlfinal/examen/investigacion.pdf)
 
