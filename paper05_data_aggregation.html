@@ -14308,6 +14308,16 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">update_display</span>
+<span class="n">DEBUG</span><span class="o">=</span><span class="kc">False</span>
+<span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">&quot;Default Values:&quot;</span><span class="p">))</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* pandas max_columns=</span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                   <span class="sa">f</span><span class="s2">&quot;* pandas max_rows=</span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+  <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span><span class="o">=</span><span class="mi">35</span>
+  <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span><span class="o">=</span><span class="mi">100</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">&quot;New Values:&quot;</span><span class="p">))</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* pandas max_columns=</span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                   <span class="sa">f</span><span class="s2">&quot;* pandas max_rows=</span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14339,14 +14349,27 @@ a.anchor-link {
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Indoor-Data">Indoor Data<a class="anchor-link" href="#Indoor-Data">&#182;</a></h2>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;data/sinaica/sinaica-imputated.pickle.gz&quot;</span><span class="p">)</span>
-<span class="n">df</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">airdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;data/airdata/air.pickle&#39;</span><span class="p">)</span>
+<span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+<span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+<span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+<span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+<span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;minute&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">minute</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+<span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;second&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">second</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">airdata</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+<span class="n">airdata</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">airdata</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">airdata</span>
 </pre></div>
 
      </div>
@@ -14385,131 +14408,110 @@ a.anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>CO</th>
-      <th>NO</th>
-      <th>NO2</th>
-      <th>NOx</th>
-      <th>O3</th>
-      <th>PM10</th>
-      <th>PM2.5</th>
-      <th>SO2</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>datetime</th>
-      <th>minute</th>
       <th>temperature</th>
       <th>pressure</th>
       <th>humidity</th>
       <th>gasResistance</th>
       <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>second</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>987</th>
-      <td>2.200000</td>
-      <td>0.205000</td>
-      <td>0.031000</td>
-      <td>0.207000</td>
-      <td>0.002000</td>
-      <td>45.000000</td>
-      <td>22.000000</td>
-      <td>0.004000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>6</td>
-      <td>2021-02-12 06:05:35.846304417</td>
-      <td>35.0</td>
-      <td>21.51</td>
-      <td>777.41</td>
-      <td>44.04</td>
-      <td>152149.0</td>
-      <td>34.7</td>
-    </tr>
-    <tr>
-      <th>988</th>
-      <td>2.200000</td>
-      <td>0.205000</td>
-      <td>0.031000</td>
-      <td>0.207000</td>
-      <td>0.002000</td>
-      <td>45.000000</td>
-      <td>22.000000</td>
-      <td>0.004000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>6</td>
-      <td>2021-02-12 06:05:38.837326527</td>
-      <td>34.0</td>
-      <td>21.51</td>
-      <td>777.41</td>
-      <td>43.98</td>
-      <td>152841.0</td>
-      <td>33.6</td>
-    </tr>
-    <tr>
-      <th>989</th>
-      <td>2.200000</td>
-      <td>0.205000</td>
-      <td>0.031000</td>
-      <td>0.207000</td>
-      <td>0.002000</td>
-      <td>45.000000</td>
-      <td>22.000000</td>
-      <td>0.004000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>6</td>
-      <td>2021-02-12 06:05:47.812360048</td>
-      <td>32.0</td>
+      <th>2021-02-12 06:04:09.089621067</th>
       <td>21.54</td>
       <td>777.41</td>
-      <td>43.73</td>
-      <td>153259.0</td>
-      <td>31.5</td>
-    </tr>
-    <tr>
-      <th>990</th>
-      <td>2.200000</td>
-      <td>0.205000</td>
-      <td>0.031000</td>
-      <td>0.207000</td>
-      <td>0.002000</td>
-      <td>45.000000</td>
-      <td>22.000000</td>
-      <td>0.004000</td>
+      <td>43.93</td>
+      <td>151328</td>
+      <td>37.5</td>
+      <td>1</td>
+      <td>2021</td>
       <td>2</td>
       <td>12</td>
       <td>6</td>
-      <td>2021-02-12 06:05:50.803695202</td>
-      <td>32.0</td>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:04:12.087778807</th>
+      <td>21.56</td>
+      <td>777.41</td>
+      <td>43.89</td>
+      <td>152702</td>
+      <td>35.6</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>4</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:04:15.072475433</th>
       <td>21.53</td>
       <td>777.41</td>
-      <td>43.70</td>
-      <td>152841.0</td>
-      <td>31.5</td>
-    </tr>
-    <tr>
-      <th>991</th>
-      <td>2.200000</td>
-      <td>0.205000</td>
-      <td>0.031000</td>
-      <td>0.207000</td>
-      <td>0.002000</td>
-      <td>45.000000</td>
-      <td>22.000000</td>
-      <td>0.004000</td>
+      <td>43.97</td>
+      <td>151328</td>
+      <td>37.5</td>
+      <td>1</td>
+      <td>2021</td>
       <td>2</td>
       <td>12</td>
       <td>6</td>
-      <td>2021-02-12 06:05:53.795462847</td>
-      <td>30.0</td>
-      <td>21.52</td>
+      <td>4</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:04:18.070170164</th>
+      <td>21.51</td>
       <td>777.41</td>
-      <td>43.70</td>
-      <td>153399.0</td>
-      <td>30.2</td>
+      <td>44.03</td>
+      <td>151464</td>
+      <td>38.5</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>4</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:04:21.061994791</th>
+      <td>21.51</td>
+      <td>777.41</td>
+      <td>44.05</td>
+      <td>152425</td>
+      <td>36.9</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>4</td>
+      <td>21</td>
     </tr>
     <tr>
       <th>...</th>
@@ -14525,121 +14527,85 @@ a.anchor-link {
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
-      <th>1582081</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
+      <th>2021-09-18 01:20:38.889113188</th>
+      <td>25.84</td>
+      <td>782.96</td>
+      <td>56.64</td>
+      <td>928867</td>
+      <td>130.8</td>
+      <td>1</td>
+      <td>2021</td>
       <td>9</td>
       <td>18</td>
-      <td>0</td>
-      <td>2021-09-18 00:59:47.142104626</td>
-      <td>138.0</td>
-      <td>26.00</td>
-      <td>782.92</td>
-      <td>56.34</td>
-      <td>916837.0</td>
-      <td>138.2</td>
+      <td>1</td>
+      <td>20</td>
+      <td>38</td>
     </tr>
     <tr>
-      <th>1582082</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
+      <th>2021-09-18 01:20:41.882042885</th>
+      <td>25.83</td>
+      <td>782.94</td>
+      <td>56.66</td>
+      <td>923130</td>
+      <td>131.5</td>
+      <td>1</td>
+      <td>2021</td>
       <td>9</td>
       <td>18</td>
-      <td>0</td>
-      <td>2021-09-18 00:59:50.136709690</td>
-      <td>138.0</td>
-      <td>26.00</td>
-      <td>782.92</td>
-      <td>56.33</td>
-      <td>917462.0</td>
-      <td>137.7</td>
+      <td>1</td>
+      <td>20</td>
+      <td>41</td>
     </tr>
     <tr>
-      <th>1582083</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
+      <th>2021-09-18 01:20:44.877856970</th>
+      <td>25.83</td>
+      <td>782.94</td>
+      <td>56.63</td>
+      <td>925034</td>
+      <td>131.3</td>
+      <td>1</td>
+      <td>2021</td>
       <td>9</td>
       <td>18</td>
-      <td>0</td>
-      <td>2021-09-18 00:59:53.131285429</td>
-      <td>138.0</td>
-      <td>26.00</td>
-      <td>782.90</td>
-      <td>56.34</td>
-      <td>916837.0</td>
-      <td>137.6</td>
+      <td>1</td>
+      <td>20</td>
+      <td>44</td>
     </tr>
     <tr>
-      <th>1582084</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
+      <th>2021-09-18 01:20:47.872255564</th>
+      <td>25.83</td>
+      <td>782.94</td>
+      <td>56.62</td>
+      <td>923130</td>
+      <td>131.9</td>
+      <td>1</td>
+      <td>2021</td>
       <td>9</td>
       <td>18</td>
-      <td>0</td>
-      <td>2021-09-18 00:59:56.125959396</td>
-      <td>136.0</td>
-      <td>26.00</td>
-      <td>782.92</td>
-      <td>56.35</td>
-      <td>921233.0</td>
-      <td>136.0</td>
+      <td>1</td>
+      <td>20</td>
+      <td>47</td>
     </tr>
     <tr>
-      <th>1582085</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
+      <th>2021-09-18 01:20:50.866486311</th>
+      <td>25.83</td>
+      <td>782.96</td>
+      <td>56.63</td>
+      <td>925034</td>
+      <td>131.6</td>
+      <td>1</td>
+      <td>2021</td>
       <td>9</td>
       <td>18</td>
-      <td>0</td>
-      <td>2021-09-18 00:59:59.120573282</td>
-      <td>134.0</td>
-      <td>25.99</td>
-      <td>782.92</td>
-      <td>56.35</td>
-      <td>922497.0</td>
-      <td>134.5</td>
+      <td>1</td>
+      <td>20</td>
+      <td>50</td>
     </tr>
   </tbody>
 </table>
-<p>1581099 rows × 18 columns</p>
+<p>6285103 rows × 12 columns</p>
 </div>
 </div>
 
@@ -14649,24 +14615,42 @@ a.anchor-link {
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Outdoor-Air-Quality-Data">Outdoor Air Quality Data<a class="anchor-link" href="#Outdoor-Air-Quality-Data">&#182;</a></h2>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;data/openweathermap/weather.pickle.gz&quot;</span><span class="p">)</span>
-
-<span class="n">weather</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]]</span>
-<span class="n">weather</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]]</span>
-<span class="n">weather</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]]</span>
-<span class="n">weather</span><span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]]</span>
-<span class="n">weather</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;temp&#39;</span><span class="p">:</span> <span class="s1">&#39;temperature&#39;</span><span class="p">},</span>
-               <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">weather</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">weather</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">],</span>
-                  <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;_outdoor&#39;</span><span class="p">))</span>
-<span class="n">weather</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">weather</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sinaica</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;data/sinaica2/dsinaica.pickle&#39;</span><span class="p">)</span>
+<span class="n">sinaica</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">mapper</span><span class="o">=</span><span class="p">{</span>
+  <span class="s2">&quot;Merced_CO&quot;</span><span class="p">:</span> <span class="s2">&quot;CO&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Camarones_NO&quot;</span><span class="p">:</span> <span class="s2">&quot;NO&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Merced_NO2&quot;</span><span class="p">:</span> <span class="s2">&quot;NO2&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Merced_NOx&quot;</span><span class="p">:</span> <span class="s2">&quot;NOx&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Merced_O3&quot;</span><span class="p">:</span> <span class="s2">&quot;O3&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Merced_PM10&quot;</span><span class="p">:</span> <span class="s2">&quot;PM10&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Merced_PM2.5&quot;</span><span class="p">:</span> <span class="s2">&quot;PM2.5&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Merced_SO2&quot;</span><span class="p">:</span> <span class="s2">&quot;SO2&quot;</span>
+<span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sinaica</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">col</span> 
+                       <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">sinaica</span><span class="o">.</span><span class="n">columns</span> 
+                       <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^(Camaron|Gustavo|Miguel|Tlalne|FES|Merced|La Pre)&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)],</span>
+              <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
+             <span class="p">)</span>
+<span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;Fecha&quot;</span><span class="p">]]</span>
+<span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;Fecha&quot;</span><span class="p">]]</span>
+<span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;Fecha&quot;</span><span class="p">]]</span>
+<span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;Fecha&quot;</span><span class="p">]]</span>
+<span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;minute&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">minute</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">sinaica</span><span class="p">[</span><span class="s2">&quot;Fecha&quot;</span><span class="p">]]</span>
+<span class="n">sinaica</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sinaica</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sinaica</span> <span class="o">=</span> <span class="n">sinaica</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sinaica</span>
 </pre></div>
 
      </div>
@@ -14682,7 +14666,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[47]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14705,149 +14689,117 @@ a.anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>CO</th>
       <th>NO</th>
+      <th>CO</th>
       <th>NO2</th>
       <th>NOx</th>
       <th>O3</th>
       <th>PM10</th>
       <th>PM2.5</th>
       <th>SO2</th>
+      <th>year</th>
       <th>month</th>
       <th>day</th>
-      <th>...</th>
-      <th>pressure_outdoor</th>
-      <th>humidity_outdoor</th>
-      <th>wind_speed</th>
-      <th>wind_deg</th>
-      <th>rain_1h</th>
-      <th>rain_3h</th>
-      <th>clouds_all</th>
-      <th>weather_id</th>
-      <th>weather_main</th>
-      <th>year</th>
+      <th>hour</th>
+      <th>minute</th>
+    </tr>
+    <tr>
+      <th>Fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>2.500000</td>
-      <td>0.244000</td>
-      <td>0.035000</td>
-      <td>0.205000</td>
-      <td>0.002000</td>
-      <td>57.000000</td>
-      <td>25.000000</td>
-      <td>0.005000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>...</td>
-      <td>1020</td>
-      <td>44</td>
-      <td>0.00</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>800</td>
-      <td>Clear</td>
+      <th>2021-01-01 00:00:00</th>
+      <td>0.006000</td>
+      <td>1.000000</td>
+      <td>0.032000</td>
+      <td>0.036000</td>
+      <td>0.006000</td>
+      <td>31.000000</td>
+      <td>19.000000</td>
+      <td>0.003000</td>
       <td>2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>2.500000</td>
-      <td>0.244000</td>
-      <td>0.035000</td>
-      <td>0.205000</td>
-      <td>0.002000</td>
-      <td>57.000000</td>
-      <td>25.000000</td>
-      <td>0.005000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>...</td>
-      <td>1020</td>
-      <td>44</td>
-      <td>0.00</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>800</td>
-      <td>Clear</td>
+      <th>2021-01-01 01:00:00</th>
+      <td>0.021000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>2.500000</td>
-      <td>0.244000</td>
-      <td>0.035000</td>
-      <td>0.205000</td>
-      <td>0.002000</td>
-      <td>57.000000</td>
-      <td>25.000000</td>
-      <td>0.005000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>...</td>
-      <td>1020</td>
-      <td>44</td>
-      <td>0.00</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>800</td>
-      <td>Clear</td>
+      <th>2021-01-01 02:00:00</th>
+      <td>0.013000</td>
+      <td>1.100000</td>
+      <td>0.032000</td>
+      <td>0.039000</td>
+      <td>0.004000</td>
+      <td>37.000000</td>
+      <td>24.000000</td>
+      <td>0.003000</td>
       <td>2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>2.500000</td>
-      <td>0.244000</td>
-      <td>0.035000</td>
-      <td>0.205000</td>
-      <td>0.002000</td>
-      <td>57.000000</td>
-      <td>25.000000</td>
-      <td>0.005000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>...</td>
-      <td>1020</td>
-      <td>44</td>
-      <td>0.00</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>800</td>
-      <td>Clear</td>
+      <th>2021-01-01 03:00:00</th>
+      <td>0.031000</td>
+      <td>1.200000</td>
+      <td>0.033000</td>
+      <td>0.043000</td>
+      <td>0.001000</td>
+      <td>49.000000</td>
+      <td>39.000000</td>
+      <td>0.003000</td>
       <td>2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>2.500000</td>
-      <td>0.244000</td>
-      <td>0.035000</td>
-      <td>0.205000</td>
-      <td>0.002000</td>
-      <td>57.000000</td>
-      <td>25.000000</td>
+      <th>2021-01-01 04:00:00</th>
       <td>0.005000</td>
-      <td>2</td>
-      <td>12</td>
-      <td>...</td>
-      <td>1020</td>
-      <td>44</td>
-      <td>0.00</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>800</td>
-      <td>Clear</td>
+      <td>1.200000</td>
+      <td>0.031000</td>
+      <td>0.039000</td>
+      <td>0.002000</td>
+      <td>80.000000</td>
+      <td>65.000000</td>
+      <td>0.003000</td>
       <td>2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -14864,138 +14816,90 @@ a.anchor-link {
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
-      <th>1605252</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
-      <td>9</td>
-      <td>18</td>
-      <td>...</td>
-      <td>1015</td>
-      <td>93</td>
-      <td>1.37</td>
-      <td>199</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>500</td>
-      <td>Rain</td>
+      <th>2021-10-04 00:00:00</th>
+      <td>0.008292</td>
+      <td>0.545833</td>
+      <td>0.019083</td>
+      <td>0.026875</td>
+      <td>0.015833</td>
+      <td>11.826087</td>
+      <td>7.913043</td>
+      <td>0.000750</td>
       <td>2021</td>
+      <td>10</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>1605253</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
-      <td>9</td>
-      <td>18</td>
-      <td>...</td>
-      <td>1015</td>
-      <td>93</td>
-      <td>1.37</td>
-      <td>199</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>500</td>
-      <td>Rain</td>
+      <th>2021-10-05 00:00:00</th>
+      <td>0.010000</td>
+      <td>0.563158</td>
+      <td>0.019722</td>
+      <td>0.030500</td>
+      <td>0.012278</td>
+      <td>11.090909</td>
+      <td>6.772727</td>
+      <td>0.000556</td>
       <td>2021</td>
+      <td>10</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>1605254</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
-      <td>9</td>
-      <td>18</td>
-      <td>...</td>
-      <td>1015</td>
-      <td>93</td>
-      <td>1.37</td>
-      <td>199</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>500</td>
-      <td>Rain</td>
+      <th>2021-10-06 00:00:00</th>
+      <td>0.007571</td>
+      <td>0.672222</td>
+      <td>0.026111</td>
+      <td>0.035611</td>
+      <td>0.011000</td>
+      <td>18.722222</td>
+      <td>11.833333</td>
+      <td>0.000111</td>
       <td>2021</td>
+      <td>10</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>1605255</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
-      <td>9</td>
-      <td>18</td>
-      <td>...</td>
-      <td>1015</td>
-      <td>93</td>
-      <td>1.37</td>
-      <td>199</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>500</td>
-      <td>Rain</td>
+      <th>2021-10-07 00:00:00</th>
+      <td>0.011565</td>
+      <td>0.713636</td>
+      <td>0.028636</td>
+      <td>0.040318</td>
+      <td>0.017909</td>
+      <td>26.772727</td>
+      <td>17.000000</td>
+      <td>0.001045</td>
       <td>2021</td>
+      <td>10</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>1605256</th>
-      <td>0.765217</td>
-      <td>0.009174</td>
-      <td>0.027826</td>
-      <td>0.039043</td>
-      <td>0.015304</td>
-      <td>20.304348</td>
-      <td>16.391304</td>
-      <td>0.001304</td>
-      <td>9</td>
-      <td>18</td>
-      <td>...</td>
-      <td>1015</td>
-      <td>93</td>
-      <td>1.37</td>
-      <td>199</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>500</td>
-      <td>Rain</td>
+      <th>2021-10-08 00:00:00</th>
+      <td>0.023778</td>
+      <td>0.758824</td>
+      <td>0.029412</td>
+      <td>0.050588</td>
+      <td>0.017941</td>
+      <td>29.000000</td>
+      <td>17.705882</td>
+      <td>0.008176</td>
       <td>2021</td>
+      <td>10</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
-<p>1605257 rows × 32 columns</p>
+<p>2352 rows × 13 columns</p>
 </div>
 </div>
 
@@ -15005,13 +14909,30 @@ a.anchor-link {
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Outdoor-Weather-Data">Outdoor Weather Data<a class="anchor-link" href="#Outdoor-Weather-Data">&#182;</a></h2>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weather</span><span class="o">.</span><span class="n">dtypes</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;data/openweathermap/weather.pickle.gz&quot;</span><span class="p">)</span>
+<span class="c1">#weather[&quot;year&quot;] = [dt.year for dt in weather[&quot;dt&quot;]]</span>
+<span class="c1">#weather[&quot;month&quot;] = [dt.month for dt in weather[&quot;dt&quot;]]</span>
+<span class="c1">#weather[&quot;day&quot;] = [dt.day for dt in weather[&quot;dt&quot;]]</span>
+<span class="c1">#weather[&quot;hour&quot;] = [dt.hour for dt in weather[&quot;dt&quot;]]</span>
+<span class="c1">#weather[&quot;minute&quot;] = [dt.minute for dt in weather[&quot;dt&quot;]]</span>
+<span class="n">weather</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;temp&#39;</span><span class="p">:</span> <span class="s1">&#39;temperature&#39;</span><span class="p">},</span>
+               <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">weather</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;dt&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">weather</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">weather</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;clouds_all&#39;</span><span class="p">,</span> <span class="s2">&quot;weather_id&quot;</span><span class="p">,</span> <span class="s1">&#39;rain_1h&#39;</span><span class="p">,</span> <span class="s1">&#39;rain_3h&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;temp_max&#39;</span><span class="p">,</span> <span class="s1">&#39;temp_min&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">weather</span>
 </pre></div>
 
      </div>
@@ -15027,45 +14948,163 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>CO                            float64
-NO                            float64
-NO2                           float64
-NOx                           float64
-O3                            float64
-PM10                          float64
-PM2.5                         float64
-SO2                           float64
-month                           int64
-day                             int64
-hour                            int64
-datetime               datetime64[ns]
-minute                        float64
-temperature                   float64
-pressure                      float64
-humidity                      float64
-gasResistance                 float64
-IAQ                           float64
-temperature_outdoor           float64
-feels_like                    float64
-temp_min                      float64
-temp_max                      float64
-pressure_outdoor                int64
-humidity_outdoor                int64
-wind_speed                    float64
-wind_deg                        int64
-rain_1h                       float64
-rain_3h                       float64
-clouds_all                      int64
-weather_id                      int64
-weather_main                   object
-year                            int64
-dtype: object</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>feels_like</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+      <th>weather_main</th>
+    </tr>
+    <tr>
+      <th>dt</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 07:00:00</th>
+      <td>13.87</td>
+      <td>12.46</td>
+      <td>1020</td>
+      <td>44</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 08:00:00</th>
+      <td>12.81</td>
+      <td>11.37</td>
+      <td>1020</td>
+      <td>47</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 09:00:00</th>
+      <td>10.83</td>
+      <td>9.35</td>
+      <td>1019</td>
+      <td>53</td>
+      <td>1.54</td>
+      <td>60</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 10:00:00</th>
+      <td>6.40</td>
+      <td>3.51</td>
+      <td>1019</td>
+      <td>61</td>
+      <td>4.12</td>
+      <td>40</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 11:00:00</th>
+      <td>6.23</td>
+      <td>6.23</td>
+      <td>1019</td>
+      <td>57</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-27 19:00:00</th>
+      <td>21.51</td>
+      <td>20.89</td>
+      <td>1006</td>
+      <td>45</td>
+      <td>0.89</td>
+      <td>139</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-09-27 20:00:00</th>
+      <td>23.18</td>
+      <td>22.81</td>
+      <td>1005</td>
+      <td>48</td>
+      <td>0.45</td>
+      <td>224</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-27 21:00:00</th>
+      <td>22.21</td>
+      <td>21.69</td>
+      <td>1025</td>
+      <td>46</td>
+      <td>6.17</td>
+      <td>220</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-27 22:00:00</th>
+      <td>21.03</td>
+      <td>20.68</td>
+      <td>1004</td>
+      <td>57</td>
+      <td>0.45</td>
+      <td>242</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-27 23:00:00</th>
+      <td>20.17</td>
+      <td>19.81</td>
+      <td>1004</td>
+      <td>60</td>
+      <td>5.66</td>
+      <td>140</td>
+      <td>Clouds</td>
+    </tr>
+  </tbody>
+</table>
+<p>5601 rows × 7 columns</p>
+</div>
 </div>
 
 </div>
@@ -15077,11 +15116,1482 @@ dtype: object</pre>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Interpolation-of-Hourly-Data">Interpolation of Hourly Data<a class="anchor-link" href="#Interpolation-of-Hourly-Data">&#182;</a></h2><p>We found that the dataframe contains repeated records on the columns of hourly data: SINAICA Gov't Air Quality Monitoring and OpenWeatherData.</p>
-<p>We think that the repeated data can be an issue, as the data moves very abruptly from a record call it at 10:57 and 11:00.</p>
-<p>We propose an approach similar to the imputations using the interpolation incorporating noise, that could avert the overfitting issue on our machine learning and deep learning training.</p>
+<h2 id="Merging-the-3-Datasets:-Indoor-Data,-Outdoor-Air-Quality-Data,-Outdoor-Weather-Data.">Merging the 3 Datasets: Indoor Data, Outdoor Air Quality Data, Outdoor Weather Data.<a class="anchor-link" href="#Merging-the-3-Datasets:-Indoor-Data,-Outdoor-Air-Quality-Data,-Outdoor-Weather-Data.">&#182;</a></h2>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Merging-Air-Quality-and-Weather-Data">Merging Air Quality and Weather Data<a class="anchor-link" href="#Merging-Air-Quality-and-Weather-Data">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">outdoor</span> <span class="o">=</span> <span class="n">sinaica</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">weather</span><span class="p">,</span> 
+                                    <span class="n">rsuffix</span><span class="o">=</span><span class="s1">&#39;_weather&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">outdoor</span> <span class="o">=</span> <span class="n">outdoor</span><span class="p">[(</span><span class="n">outdoor</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">airdata</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">&amp;</span>
+                  <span class="p">(</span><span class="n">outdoor</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">airdata</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())]</span>
+<span class="n">outdoor</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">outdoor</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO</th>
+      <th>CO</th>
+      <th>NO2</th>
+      <th>NOx</th>
+      <th>O3</th>
+      <th>PM10</th>
+      <th>PM2.5</th>
+      <th>SO2</th>
+      <th>temperature</th>
+      <th>feels_like</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+      <th>weather_main</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 07:00:00</th>
+      <td>0.244000</td>
+      <td>2.500000</td>
+      <td>0.035000</td>
+      <td>0.205000</td>
+      <td>0.002000</td>
+      <td>57.000000</td>
+      <td>25.000000</td>
+      <td>0.005000</td>
+      <td>13.87</td>
+      <td>12.46</td>
+      <td>1020.0</td>
+      <td>44.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 08:00:00</th>
+      <td>0.146000</td>
+      <td>1.600000</td>
+      <td>0.030000</td>
+      <td>0.089000</td>
+      <td>0.004000</td>
+      <td>67.000000</td>
+      <td>33.000000</td>
+      <td>0.003000</td>
+      <td>12.81</td>
+      <td>11.37</td>
+      <td>1020.0</td>
+      <td>47.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 09:00:00</th>
+      <td>0.099000</td>
+      <td>1.500000</td>
+      <td>0.039000</td>
+      <td>0.072000</td>
+      <td>0.012000</td>
+      <td>50.000000</td>
+      <td>28.000000</td>
+      <td>0.002000</td>
+      <td>10.83</td>
+      <td>9.35</td>
+      <td>1019.0</td>
+      <td>53.0</td>
+      <td>1.54</td>
+      <td>60.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 10:00:00</th>
+      <td>0.024000</td>
+      <td>1.200000</td>
+      <td>0.030000</td>
+      <td>0.047000</td>
+      <td>0.025000</td>
+      <td>40.000000</td>
+      <td>21.000000</td>
+      <td>0.002000</td>
+      <td>6.40</td>
+      <td>3.51</td>
+      <td>1019.0</td>
+      <td>61.0</td>
+      <td>4.12</td>
+      <td>40.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 11:00:00</th>
+      <td>0.009000</td>
+      <td>0.900000</td>
+      <td>0.016000</td>
+      <td>0.026000</td>
+      <td>0.033000</td>
+      <td>33.000000</td>
+      <td>19.000000</td>
+      <td>0.001000</td>
+      <td>6.23</td>
+      <td>6.23</td>
+      <td>1019.0</td>
+      <td>57.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-14 00:00:00</th>
+      <td>0.017000</td>
+      <td>0.716667</td>
+      <td>0.015125</td>
+      <td>0.024625</td>
+      <td>0.013333</td>
+      <td>7.047619</td>
+      <td>4.500000</td>
+      <td>0.000125</td>
+      <td>15.85</td>
+      <td>14.95</td>
+      <td>1025.0</td>
+      <td>56.0</td>
+      <td>4.12</td>
+      <td>170.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-15 00:00:00</th>
+      <td>0.027458</td>
+      <td>0.954167</td>
+      <td>0.028167</td>
+      <td>0.048625</td>
+      <td>0.019375</td>
+      <td>24.416667</td>
+      <td>17.333333</td>
+      <td>0.000875</td>
+      <td>17.95</td>
+      <td>17.08</td>
+      <td>1023.0</td>
+      <td>49.0</td>
+      <td>7.72</td>
+      <td>130.0</td>
+      <td>Clouds</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 00:00:00</th>
+      <td>0.006875</td>
+      <td>0.883333</td>
+      <td>0.028000</td>
+      <td>0.034458</td>
+      <td>0.022792</td>
+      <td>46.833333</td>
+      <td>40.041667</td>
+      <td>0.001542</td>
+      <td>18.45</td>
+      <td>17.63</td>
+      <td>1022.0</td>
+      <td>49.0</td>
+      <td>6.17</td>
+      <td>130.0</td>
+      <td>Smoke</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 00:00:00</th>
+      <td>0.010250</td>
+      <td>0.947619</td>
+      <td>0.032700</td>
+      <td>0.042750</td>
+      <td>0.026650</td>
+      <td>29.666667</td>
+      <td>24.875000</td>
+      <td>0.003350</td>
+      <td>18.34</td>
+      <td>17.69</td>
+      <td>1024.0</td>
+      <td>56.0</td>
+      <td>4.63</td>
+      <td>300.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:00:00</th>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>17.61</td>
+      <td>17.85</td>
+      <td>1015.0</td>
+      <td>93.0</td>
+      <td>1.37</td>
+      <td>199.0</td>
+      <td>Rain</td>
+    </tr>
+  </tbody>
+</table>
+<p>1341 rows × 15 columns</p>
+</div>
+</div>
 
 </div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">outdoor</span><span class="p">[</span><span class="n">outdoor</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="s2">&quot;2021-09-15 23:59&quot;</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[33]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO</th>
+      <th>CO</th>
+      <th>NO2</th>
+      <th>NOx</th>
+      <th>O3</th>
+      <th>PM10</th>
+      <th>PM2.5</th>
+      <th>SO2</th>
+      <th>temperature</th>
+      <th>feels_like</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+      <th>weather_main</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-09-16</th>
+      <td>0.006875</td>
+      <td>0.883333</td>
+      <td>0.028000</td>
+      <td>0.034458</td>
+      <td>0.022792</td>
+      <td>46.833333</td>
+      <td>40.041667</td>
+      <td>0.001542</td>
+      <td>18.45</td>
+      <td>17.63</td>
+      <td>1022.0</td>
+      <td>49.0</td>
+      <td>6.17</td>
+      <td>130.0</td>
+      <td>Smoke</td>
+    </tr>
+    <tr>
+      <th>2021-09-17</th>
+      <td>0.010250</td>
+      <td>0.947619</td>
+      <td>0.032700</td>
+      <td>0.042750</td>
+      <td>0.026650</td>
+      <td>29.666667</td>
+      <td>24.875000</td>
+      <td>0.003350</td>
+      <td>18.34</td>
+      <td>17.69</td>
+      <td>1024.0</td>
+      <td>56.0</td>
+      <td>4.63</td>
+      <td>300.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-18</th>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>17.61</td>
+      <td>17.85</td>
+      <td>1015.0</td>
+      <td>93.0</td>
+      <td>1.37</td>
+      <td>199.0</td>
+      <td>Rain</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Merging-Indoor-and-Outdoor-(Air-Quality-and-Weather)-Data">Merging Indoor and Outdoor (Air Quality and Weather) Data<a class="anchor-link" href="#Merging-Indoor-and-Outdoor-(Air-Quality-and-Weather)-Data">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[79]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge_asof</span><span class="p">(</span><span class="n">airdata</span><span class="p">,</span> 
+                   <span class="n">outdoor</span><span class="p">,</span> 
+                   <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                   <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;_outdoor&#39;</span><span class="p">),</span>
+                   <span class="n">tolerance</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;3 seconds&#39;</span><span class="p">),</span>
+                   <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;forward&quot;</span>
+             <span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="s2">&quot;2021-09-16 23:59:40&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[79]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>...</th>
+      <th>PM10</th>
+      <th>PM2.5</th>
+      <th>SO2</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+      <th>weather_main</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-09-16 23:59:42.445474625</th>
+      <td>25.86</td>
+      <td>780.44</td>
+      <td>57.00</td>
+      <td>877365</td>
+      <td>246.4</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>16</td>
+      <td>23</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 23:59:45.439809322</th>
+      <td>25.85</td>
+      <td>780.40</td>
+      <td>57.04</td>
+      <td>874512</td>
+      <td>246.7</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>16</td>
+      <td>23</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 23:59:48.434415102</th>
+      <td>25.85</td>
+      <td>780.42</td>
+      <td>57.07</td>
+      <td>877365</td>
+      <td>245.9</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>16</td>
+      <td>23</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 23:59:51.428925753</th>
+      <td>25.84</td>
+      <td>780.42</td>
+      <td>57.07</td>
+      <td>872810</td>
+      <td>246.9</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>16</td>
+      <td>23</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 23:59:54.423571348</th>
+      <td>25.84</td>
+      <td>780.42</td>
+      <td>57.07</td>
+      <td>872244</td>
+      <td>247.7</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>16</td>
+      <td>23</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 23:59:57.418201685</th>
+      <td>25.84</td>
+      <td>780.44</td>
+      <td>57.06</td>
+      <td>868302</td>
+      <td>249.6</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>16</td>
+      <td>23</td>
+      <td>...</td>
+      <td>29.666667</td>
+      <td>24.875</td>
+      <td>0.00335</td>
+      <td>18.34</td>
+      <td>17.69</td>
+      <td>1024.0</td>
+      <td>56.0</td>
+      <td>4.63</td>
+      <td>300.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 00:00:00.412962675</th>
+      <td>25.84</td>
+      <td>780.42</td>
+      <td>57.02</td>
+      <td>869987</td>
+      <td>250.0</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>17</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 00:00:03.407538652</th>
+      <td>25.84</td>
+      <td>780.44</td>
+      <td>57.02</td>
+      <td>877365</td>
+      <td>248.1</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>17</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 00:00:06.402314186</th>
+      <td>25.83</td>
+      <td>780.42</td>
+      <td>57.05</td>
+      <td>868302</td>
+      <td>249.8</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>17</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 00:00:09.396840096</th>
+      <td>25.84</td>
+      <td>780.42</td>
+      <td>57.00</td>
+      <td>875651</td>
+      <td>248.6</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>17</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 27 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[80]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Markdown</span><span class="p">(</span><span class="s2">&quot;Dataset with Indoor and Outdoor Data:</span><span class="se">\n</span><span class="s2">* </span><span class="si">%d</span><span class="s2"> Rows</span><span class="se">\n</span><span class="s2">* </span><span class="si">%d</span><span class="s2"> Columns.&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[80]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/markdown">
+<p>Dataset with Indoor and Outdoor Data:</p>
+<ul>
+<li>6285103 Rows</li>
+<li>27 Columns.</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[81]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">data</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[81]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>...</th>
+      <th>PM10</th>
+      <th>PM2.5</th>
+      <th>SO2</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+      <th>weather_main</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:59:59.987502337</th>
+      <td>21.51</td>
+      <td>777.30</td>
+      <td>43.78</td>
+      <td>143943</td>
+      <td>96.2</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>...</td>
+      <td>57.000000</td>
+      <td>25.000000</td>
+      <td>0.005000</td>
+      <td>13.87</td>
+      <td>12.46</td>
+      <td>1020.0</td>
+      <td>44.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 07:59:58.990879536</th>
+      <td>21.01</td>
+      <td>776.94</td>
+      <td>42.43</td>
+      <td>152841</td>
+      <td>80.4</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>7</td>
+      <td>...</td>
+      <td>67.000000</td>
+      <td>33.000000</td>
+      <td>0.003000</td>
+      <td>12.81</td>
+      <td>11.37</td>
+      <td>1020.0</td>
+      <td>47.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 08:59:57.738294601</th>
+      <td>20.41</td>
+      <td>776.35</td>
+      <td>42.60</td>
+      <td>153259</td>
+      <td>99.9</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>8</td>
+      <td>...</td>
+      <td>50.000000</td>
+      <td>28.000000</td>
+      <td>0.002000</td>
+      <td>10.83</td>
+      <td>9.35</td>
+      <td>1019.0</td>
+      <td>53.0</td>
+      <td>1.54</td>
+      <td>60.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 09:59:59.458741903</th>
+      <td>20.28</td>
+      <td>776.20</td>
+      <td>42.18</td>
+      <td>145689</td>
+      <td>177.1</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>9</td>
+      <td>...</td>
+      <td>40.000000</td>
+      <td>21.000000</td>
+      <td>0.002000</td>
+      <td>6.40</td>
+      <td>3.51</td>
+      <td>1019.0</td>
+      <td>61.0</td>
+      <td>4.12</td>
+      <td>40.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 10:59:58.053189993</th>
+      <td>19.92</td>
+      <td>776.23</td>
+      <td>42.24</td>
+      <td>141519</td>
+      <td>214.2</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>2</td>
+      <td>12</td>
+      <td>10</td>
+      <td>...</td>
+      <td>33.000000</td>
+      <td>19.000000</td>
+      <td>0.001000</td>
+      <td>6.23</td>
+      <td>6.23</td>
+      <td>1019.0</td>
+      <td>57.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-13 23:59:59.861400843</th>
+      <td>24.32</td>
+      <td>780.40</td>
+      <td>55.44</td>
+      <td>872810</td>
+      <td>230.0</td>
+      <td>3</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>13</td>
+      <td>23</td>
+      <td>...</td>
+      <td>7.047619</td>
+      <td>4.500000</td>
+      <td>0.000125</td>
+      <td>15.85</td>
+      <td>14.95</td>
+      <td>1025.0</td>
+      <td>56.0</td>
+      <td>4.12</td>
+      <td>170.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-14 23:59:58.549029827</th>
+      <td>25.52</td>
+      <td>779.40</td>
+      <td>54.90</td>
+      <td>937936</td>
+      <td>125.9</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>14</td>
+      <td>23</td>
+      <td>...</td>
+      <td>24.416667</td>
+      <td>17.333333</td>
+      <td>0.000875</td>
+      <td>17.95</td>
+      <td>17.08</td>
+      <td>1023.0</td>
+      <td>49.0</td>
+      <td>7.72</td>
+      <td>130.0</td>
+      <td>Clouds</td>
+    </tr>
+    <tr>
+      <th>2021-09-15 23:59:58.141078472</th>
+      <td>27.09</td>
+      <td>778.30</td>
+      <td>48.42</td>
+      <td>1221617</td>
+      <td>148.6</td>
+      <td>3</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>15</td>
+      <td>23</td>
+      <td>...</td>
+      <td>46.833333</td>
+      <td>40.041667</td>
+      <td>0.001542</td>
+      <td>18.45</td>
+      <td>17.63</td>
+      <td>1022.0</td>
+      <td>49.0</td>
+      <td>6.17</td>
+      <td>130.0</td>
+      <td>Smoke</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 23:59:57.418201685</th>
+      <td>25.84</td>
+      <td>780.44</td>
+      <td>57.06</td>
+      <td>868302</td>
+      <td>249.6</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>16</td>
+      <td>23</td>
+      <td>...</td>
+      <td>29.666667</td>
+      <td>24.875000</td>
+      <td>0.003350</td>
+      <td>18.34</td>
+      <td>17.69</td>
+      <td>1024.0</td>
+      <td>56.0</td>
+      <td>4.63</td>
+      <td>300.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 23:59:59.829545736</th>
+      <td>26.38</td>
+      <td>782.02</td>
+      <td>54.55</td>
+      <td>947851</td>
+      <td>112.9</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>9</td>
+      <td>17</td>
+      <td>23</td>
+      <td>...</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>17.61</td>
+      <td>17.85</td>
+      <td>1015.0</td>
+      <td>93.0</td>
+      <td>1.37</td>
+      <td>199.0</td>
+      <td>Rain</td>
+    </tr>
+  </tbody>
+</table>
+<p>1189 rows × 27 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Imputations">Imputations<a class="anchor-link" href="#Imputations">&#182;</a></h2><p>We found that the resulting dataframe after merging 2 datasets (Outdoor Data that is sampled every 1 hour and Indoor Data that is sampled every 3 seconds) contains repeated records on the columns of hourly data: SINAICA Gov't Air Quality Monitoring and OpenWeatherData.</p>
+<p>We think that the repeated data can be an issue, as the data moves very abruptly from a record call it at 10:57 and 11:00. This is relevant as the real world is not represented by the data correctly. Temperature, pressure and general natural features move slowly from one value to other. But we don't have that data, and it's not easily obtainable.</p>
+<p>Therefore, we propose an approach similar to the imputations using the interpolation incorporating noise, that could avert the overfitting issue on our machine learning and deep learning training.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[82]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s2">&quot;temperature_outdoor&quot;</span><span class="p">,</span> <span class="s2">&quot;feels_like&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure_outdoor&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;humidity_outdoor&quot;</span><span class="p">,</span> <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span> <span class="s2">&quot;wind_deg&quot;</span><span class="p">,</span> <span class="s2">&quot;weather_main&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df2</span><span class="p">[</span><span class="o">~</span><span class="n">df2</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 476 ms, sys: 166 ms, total: 642 ms
+Wall time: 639 ms
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[82]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+      <th>weather_main</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:59:59.987502337</th>
+      <td>13.87</td>
+      <td>12.46</td>
+      <td>1020.0</td>
+      <td>44.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 07:59:58.990879536</th>
+      <td>12.81</td>
+      <td>11.37</td>
+      <td>1020.0</td>
+      <td>47.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 08:59:57.738294601</th>
+      <td>10.83</td>
+      <td>9.35</td>
+      <td>1019.0</td>
+      <td>53.0</td>
+      <td>1.54</td>
+      <td>60.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 09:59:59.458741903</th>
+      <td>6.40</td>
+      <td>3.51</td>
+      <td>1019.0</td>
+      <td>61.0</td>
+      <td>4.12</td>
+      <td>40.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 10:59:58.053189993</th>
+      <td>6.23</td>
+      <td>6.23</td>
+      <td>1019.0</td>
+      <td>57.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>Clear</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-13 23:59:59.861400843</th>
+      <td>15.85</td>
+      <td>14.95</td>
+      <td>1025.0</td>
+      <td>56.0</td>
+      <td>4.12</td>
+      <td>170.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-14 23:59:58.549029827</th>
+      <td>17.95</td>
+      <td>17.08</td>
+      <td>1023.0</td>
+      <td>49.0</td>
+      <td>7.72</td>
+      <td>130.0</td>
+      <td>Clouds</td>
+    </tr>
+    <tr>
+      <th>2021-09-15 23:59:58.141078472</th>
+      <td>18.45</td>
+      <td>17.63</td>
+      <td>1022.0</td>
+      <td>49.0</td>
+      <td>6.17</td>
+      <td>130.0</td>
+      <td>Smoke</td>
+    </tr>
+    <tr>
+      <th>2021-09-16 23:59:57.418201685</th>
+      <td>18.34</td>
+      <td>17.69</td>
+      <td>1024.0</td>
+      <td>56.0</td>
+      <td>4.63</td>
+      <td>300.0</td>
+      <td>Rain</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 23:59:59.829545736</th>
+      <td>17.61</td>
+      <td>17.85</td>
+      <td>1015.0</td>
+      <td>93.0</td>
+      <td>1.37</td>
+      <td>199.0</td>
+      <td>Rain</td>
+    </tr>
+  </tbody>
+</table>
+<p>1323 rows × 7 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="k">def</span> <span class="nf">interpolate_missing</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to interpolate missing.</span>
+<span class="sd">    </span>
+<span class="sd">    examples </span>
+<span class="sd">        airdata2 = interpolate_missing(airdata, idx = airdata[airdata.delta &gt; 100].index[0])</span>
+<span class="sd">        airdata2 = interpolate_missing(airdata, 194044)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">175904</span><span class="p">)</span>
+    <span class="n">df_prev</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">a</span>  <span class="o">=</span> <span class="n">df_prev</span>
+    <span class="n">b</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        
+    <span class="n">offsetEnd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">Hour</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># remove closed form</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">offsetEnd</span><span class="p">,</span> 
+                             <span class="n">b</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offsetEnd</span><span class="p">,</span> 
+                             <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;1h&#39;</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_names</span><span class="p">(</span><span class="s2">&quot;datetime&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;NO&#39;</span><span class="p">,</span> <span class="s1">&#39;NO2&#39;</span><span class="p">,</span> <span class="s1">&#39;NOx&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">,</span> <span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">]:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">])]</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">v</span><span class="p">])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">])</span>
+        <span class="n">sd</span> <span class="o">=</span> <span class="mf">0.7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">df_prev</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+        <span class="n">rnds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="o">-</span><span class="n">sd</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]))</span>
+        <span class="c1">#rnds = np.random.uniform(-2*np.pi, 2*np.pi, len(out[&quot;datetime&quot;]))</span>
+        <span class="c1">#rnds = np.cos(rnds) * sd</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">+</span> <span class="n">rnds</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>    
+        <span class="c1">#out[v] = [m*j  b[v] + rnds[j-1] for j in i]</span>
+        
+    <span class="c1">#out[&quot;iaqAccuracy&quot;] = 1</span>
+    
+    <span class="n">idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="n">reorder_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="s1">&#39;datetime&#39;</span><span class="p">]</span>
+    <span class="n">reorder_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;datetime&quot;</span><span class="p">)</span>
+    <span class="n">idf</span> <span class="o">=</span> <span class="n">idf</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">reorder_columns</span><span class="p">)</span>
+    <span class="c1">#print(reorder_columns)</span>
+    
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]]</span>
+    <span class="c1">#idf[&quot;minute&quot;] = [dt.minute for dt in idf[&quot;datetime&quot;]]</span>
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;imputated&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        
+    <span class="c1"># original dataframe</span>
+    <span class="n">idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">idf</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
+    <span class="n">idf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">idf</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime-1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;delta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;datetime-1&quot;</span><span class="p">]</span>
+    <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;delta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idf</span><span class="p">[</span><span class="s2">&quot;delta&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">seconds</span> <span class="o">//</span> <span class="mi">60</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">return</span>  <span class="n">idf</span>
+
+<span class="n">sinaica2</span> <span class="o">=</span> <span class="n">sinaica_imputated</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">imputation_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">sinaica_imputated</span><span class="o">.</span><span class="n">delta</span><span class="p">[</span><span class="n">sinaica_imputated</span><span class="o">.</span><span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)]</span>
+<span class="n">sinaica2</span> <span class="o">=</span> <span class="n">sinaica_imputated</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">imputation_list</span><span class="p">:</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">sinaica2</span> <span class="o">=</span> <span class="n">interpolate_missing</span><span class="p">(</span><span class="n">sinaica2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+  <span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sinaica2</span> <span class="o">=</span> <span class="n">sinaica2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -15089,16 +16599,1069 @@ dtype: object</pre>
 <p>In the following subsections we create those resampled-data dataframes.</p>
 <h3 id="1-Minute-Resampling">1 Minute Resampling<a class="anchor-link" href="#1-Minute-Resampling">&#182;</a></h3>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">df_1min</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">df</span><span class="o">.</span>
+  <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1min&#39;</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df_1min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_1min.pickle.gz&#39;</span><span class="p">)</span>
+<span class="n">df_1min</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 4.91 s, sys: 166 ms, total: 5.07 s
+Wall time: 5.07 s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>second</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:04:00</th>
+      <td>21.530000</td>
+      <td>777.410000</td>
+      <td>43.974000</td>
+      <td>151849.400000</td>
+      <td>37.200000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>4.0</td>
+      <td>15.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:05:00</th>
+      <td>21.526250</td>
+      <td>777.408750</td>
+      <td>43.840000</td>
+      <td>152790.000000</td>
+      <td>32.162500</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>45.875000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:06:00</th>
+      <td>21.693000</td>
+      <td>777.409000</td>
+      <td>43.426000</td>
+      <td>152220.550000</td>
+      <td>34.325000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>6.0</td>
+      <td>30.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:07:00</th>
+      <td>21.759000</td>
+      <td>777.410500</td>
+      <td>43.245500</td>
+      <td>151978.450000</td>
+      <td>36.190000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>30.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:08:00</th>
+      <td>21.750500</td>
+      <td>777.390500</td>
+      <td>43.056000</td>
+      <td>150300.400000</td>
+      <td>46.600000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+      <td>30.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:16:00</th>
+      <td>25.871000</td>
+      <td>782.805000</td>
+      <td>56.607000</td>
+      <td>921467.050000</td>
+      <td>133.940000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>16.0</td>
+      <td>28.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:17:00</th>
+      <td>25.861000</td>
+      <td>782.832000</td>
+      <td>56.587500</td>
+      <td>921211.600000</td>
+      <td>134.815000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>17.0</td>
+      <td>28.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:18:00</th>
+      <td>25.850000</td>
+      <td>782.866000</td>
+      <td>56.597500</td>
+      <td>922348.700000</td>
+      <td>133.850000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>18.0</td>
+      <td>28.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:19:00</th>
+      <td>25.836190</td>
+      <td>782.900000</td>
+      <td>56.683810</td>
+      <td>921997.095238</td>
+      <td>134.190476</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>19.0</td>
+      <td>29.619048</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:20:00</th>
+      <td>25.836471</td>
+      <td>782.932941</td>
+      <td>56.662941</td>
+      <td>922768.882353</td>
+      <td>133.876471</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>20.0</td>
+      <td>26.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>313637 rows × 18 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="2-Minute-Resampling">2 Minute Resampling<a class="anchor-link" href="#2-Minute-Resampling">&#182;</a></h3>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">df_2min</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">df</span><span class="o">.</span>
+  <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2min&#39;</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df_2min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_2min.pickle.gz&#39;</span><span class="p">)</span>
+<span class="n">df_2min</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 2.32 s, sys: 112 ms, total: 2.43 s
+Wall time: 2.43 s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>second</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:04:00</th>
+      <td>21.527692</td>
+      <td>777.409231</td>
+      <td>43.891538</td>
+      <td>152428.230769</td>
+      <td>34.100000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>4.615385</td>
+      <td>34.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:06:00</th>
+      <td>21.726000</td>
+      <td>777.409750</td>
+      <td>43.335750</td>
+      <td>152099.500000</td>
+      <td>35.257500</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>6.500000</td>
+      <td>30.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:08:00</th>
+      <td>21.686250</td>
+      <td>777.365250</td>
+      <td>43.291500</td>
+      <td>147429.200000</td>
+      <td>72.652500</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>8.500000</td>
+      <td>30.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:10:00</th>
+      <td>21.499500</td>
+      <td>777.302000</td>
+      <td>43.106250</td>
+      <td>149288.475000</td>
+      <td>69.505000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>10.500000</td>
+      <td>29.900000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:12:00</th>
+      <td>21.628250</td>
+      <td>777.279500</td>
+      <td>42.830750</td>
+      <td>149325.975000</td>
+      <td>71.237500</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>12.500000</td>
+      <td>29.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:12:00</th>
+      <td>25.913500</td>
+      <td>782.776500</td>
+      <td>56.513250</td>
+      <td>920534.625000</td>
+      <td>134.397500</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>12.500000</td>
+      <td>28.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:14:00</th>
+      <td>25.892750</td>
+      <td>782.793500</td>
+      <td>56.555500</td>
+      <td>921024.825000</td>
+      <td>134.380000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>14.500000</td>
+      <td>28.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:16:00</th>
+      <td>25.866000</td>
+      <td>782.818500</td>
+      <td>56.597250</td>
+      <td>921339.325000</td>
+      <td>134.377500</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>16.500000</td>
+      <td>28.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:18:00</th>
+      <td>25.842927</td>
+      <td>782.883415</td>
+      <td>56.641707</td>
+      <td>922168.609756</td>
+      <td>134.024390</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>18.512195</td>
+      <td>29.073171</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:20:00</th>
+      <td>25.836471</td>
+      <td>782.932941</td>
+      <td>56.662941</td>
+      <td>922768.882353</td>
+      <td>133.876471</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>20.000000</td>
+      <td>26.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>156819 rows × 18 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="3-Minute-Resampling">3 Minute Resampling<a class="anchor-link" href="#3-Minute-Resampling">&#182;</a></h3>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">df_5min</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">df</span><span class="o">.</span>
+  <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;5min&#39;</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df_5min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_5min.pickle.gz&#39;</span><span class="p">)</span>
+<span class="n">df_5min</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 918 ms, sys: 119 ms, total: 1.04 s
+Wall time: 1.04 s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>second</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:00:00</th>
+      <td>21.530000</td>
+      <td>777.410000</td>
+      <td>43.974000</td>
+      <td>151849.400000</td>
+      <td>37.200000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>4.000000</td>
+      <td>15.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:05:00</th>
+      <td>21.689773</td>
+      <td>777.389432</td>
+      <td>43.361477</td>
+      <td>150039.409091</td>
+      <td>51.973864</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>7.272727</td>
+      <td>31.897727</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:10:00</th>
+      <td>21.538300</td>
+      <td>777.285200</td>
+      <td>42.909800</td>
+      <td>149975.940000</td>
+      <td>67.172000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>12.000000</td>
+      <td>29.660000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:15:00</th>
+      <td>21.563900</td>
+      <td>777.269000</td>
+      <td>42.704100</td>
+      <td>150897.020000</td>
+      <td>65.798000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>17.000000</td>
+      <td>28.890000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:20:00</th>
+      <td>21.616931</td>
+      <td>777.223960</td>
+      <td>42.695545</td>
+      <td>149963.910891</td>
+      <td>71.275248</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>22.009901</td>
+      <td>29.029703</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:00:00</th>
+      <td>25.987500</td>
+      <td>782.832000</td>
+      <td>56.333000</td>
+      <td>918660.290000</td>
+      <td>135.811000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>2.000000</td>
+      <td>29.710000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:05:00</th>
+      <td>25.966100</td>
+      <td>782.800200</td>
+      <td>56.379800</td>
+      <td>920302.740000</td>
+      <td>134.243000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>7.000000</td>
+      <td>29.500000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:10:00</th>
+      <td>25.915100</td>
+      <td>782.782200</td>
+      <td>56.511300</td>
+      <td>920836.000000</td>
+      <td>134.184000</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>12.000000</td>
+      <td>28.600000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:15:00</th>
+      <td>25.860099</td>
+      <td>782.840594</td>
+      <td>56.613069</td>
+      <td>921519.306931</td>
+      <td>134.372277</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>17.019802</td>
+      <td>28.732673</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:20:00</th>
+      <td>25.836471</td>
+      <td>782.932941</td>
+      <td>56.662941</td>
+      <td>922768.882353</td>
+      <td>133.876471</td>
+      <td>1.0</td>
+      <td>2021.0</td>
+      <td>9.0</td>
+      <td>18.0</td>
+      <td>1.0</td>
+      <td>20.000000</td>
+      <td>26.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>62729 rows × 18 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
