@@ -18,4 +18,6 @@ _Professor: Dr. Edgar Francisco Román-Rangel._
 
 4. Imputations on Government Air Quality Monitoring Data [[html]](https://philwebsurfer.github.io/dlfinal/paper04_imputations_sinaica.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/paper04_imputations_sinaica.pdf)
 
+5. Data Sources Aggretation [[html]](https://philwebsurfer.github.io/dlfinal/paper05_data_aggregation.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/paper05_data_aggregation.pdf)
+
 # [Final Exam](https://philwebsurfer.github.io/dlfinal/examen)
