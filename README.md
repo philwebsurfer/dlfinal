@@ -20,4 +20,6 @@ _Professor: Dr. Edgar Francisco Román-Rangel._
 
 5. Data Sources Aggretation [[html]](https://philwebsurfer.github.io/dlfinal/paper05_data_aggregation.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/paper05_data_aggregation.pdf)
 
+6. Model Testing[[html]](https://philwebsurfer.github.io/dlfinal/paper06_model_best.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/paper06_model_best.pdf)
+
 # [Final Exam](https://philwebsurfer.github.io/dlfinal/examen)
