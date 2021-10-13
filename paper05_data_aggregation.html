@@ -16572,7 +16572,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 999 ms, sys: 176 ms, total: 1.18 s
+<pre>CPU times: user 1.03 s, sys: 146 ms, total: 1.17 s
 Wall time: 1.17 s
 </pre>
 </div>
@@ -16664,7 +16664,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 1.9 s, sys: 1.09 s, total: 2.99 s
+<pre>CPU times: user 1.87 s, sys: 1.12 s, total: 2.99 s
 Wall time: 2.99 s
 </pre>
 </div>
@@ -17135,8 +17135,8 @@ Wall time: 2.99 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 340 ms, sys: 293 ms, total: 633 ms
-Wall time: 632 ms
+<pre>CPU times: user 489 ms, sys: 655 ms, total: 1.14 s
+Wall time: 1.14 s
 </pre>
 </div>
 </div>
@@ -18460,8 +18460,8 @@ Wall time: 632 ms
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 20.7 s, sys: 11.3 s, total: 32.1 s
-Wall time: 32 s
+<pre>CPU times: user 21.3 s, sys: 12.5 s, total: 33.8 s
+Wall time: 33.8 s
 </pre>
 </div>
 </div>
@@ -18490,6 +18490,9 @@ Wall time: 32 s
   <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1min&#39;</span><span class="p">)</span><span class="o">.</span>
   <span class="n">mean</span><span class="p">()</span>
 <span class="p">)</span>
+<span class="n">df_1min</span> <span class="o">=</span> <span class="n">df_1min</span><span class="p">[</span><span class="o">~</span><span class="n">df_1min</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">df_1min</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df_1min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_1min.pickle.gz&#39;</span><span class="p">)</span>
 <span class="n">df_1min</span>
 </pre></div>
@@ -18511,8 +18514,8 @@ Wall time: 32 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 6.83 s, sys: 605 ms, total: 7.44 s
-Wall time: 7.43 s
+<pre>CPU times: user 6.61 s, sys: 640 ms, total: 7.25 s
+Wall time: 7.25 s
 </pre>
 </div>
 </div>
@@ -18549,12 +18552,6 @@ Wall time: 7.43 s
       <th>gasResistance</th>
       <th>IAQ</th>
       <th>iaqAccuracy</th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>minute</th>
-      <th>second</th>
       <th>NO</th>
       <th>CO</th>
       <th>NO2</th>
@@ -18592,12 +18589,6 @@ Wall time: 7.43 s
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -18609,12 +18600,6 @@ Wall time: 7.43 s
       <td>151849.400000</td>
       <td>37.200000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>4.0</td>
-      <td>15.000000</td>
       <td>0.205071</td>
       <td>2.200547</td>
       <td>0.031007</td>
@@ -18638,12 +18623,6 @@ Wall time: 7.43 s
       <td>152790.000000</td>
       <td>32.162500</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>5.0</td>
-      <td>45.875000</td>
       <td>0.205302</td>
       <td>2.202327</td>
       <td>0.031031</td>
@@ -18667,12 +18646,6 @@ Wall time: 7.43 s
       <td>152220.550000</td>
       <td>34.325000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>30.500000</td>
       <td>0.205801</td>
       <td>2.206159</td>
       <td>0.031082</td>
@@ -18696,12 +18669,6 @@ Wall time: 7.43 s
       <td>151978.450000</td>
       <td>36.190000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>7.0</td>
-      <td>30.500000</td>
       <td>0.206512</td>
       <td>2.211633</td>
       <td>0.031155</td>
@@ -18725,12 +18692,6 @@ Wall time: 7.43 s
       <td>150300.400000</td>
       <td>46.600000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>8.0</td>
-      <td>30.500000</td>
       <td>0.207224</td>
       <td>2.217108</td>
       <td>0.031228</td>
@@ -18768,12 +18729,6 @@ Wall time: 7.43 s
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
       <th>2021-09-18 01:16:00</th>
@@ -18783,12 +18738,6 @@ Wall time: 7.43 s
       <td>921467.050000</td>
       <td>133.940000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>16.0</td>
-      <td>28.500000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -18812,12 +18761,6 @@ Wall time: 7.43 s
       <td>921211.600000</td>
       <td>134.815000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>17.0</td>
-      <td>28.500000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -18841,12 +18784,6 @@ Wall time: 7.43 s
       <td>922348.700000</td>
       <td>133.850000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>18.0</td>
-      <td>28.500000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -18870,12 +18807,6 @@ Wall time: 7.43 s
       <td>921997.095238</td>
       <td>134.190476</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>19.0</td>
-      <td>29.619048</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -18899,12 +18830,6 @@ Wall time: 7.43 s
       <td>922768.882353</td>
       <td>133.876471</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>20.0</td>
-      <td>26.000000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -18922,7 +18847,7 @@ Wall time: 7.43 s
     </tr>
   </tbody>
 </table>
-<p>313637 rows × 26 columns</p>
+<p>313595 rows × 20 columns</p>
 </div>
 </div>
 
@@ -18950,6 +18875,9 @@ Wall time: 7.43 s
   <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2min&#39;</span><span class="p">)</span><span class="o">.</span>
   <span class="n">mean</span><span class="p">()</span>
 <span class="p">)</span>
+<span class="n">df_2min</span> <span class="o">=</span> <span class="n">df_2min</span><span class="p">[</span><span class="o">~</span><span class="n">df_2min</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">df_2min</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df_2min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_2min.pickle.gz&#39;</span><span class="p">)</span>
 <span class="n">df_2min</span>
 </pre></div>
@@ -18971,8 +18899,8 @@ Wall time: 7.43 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 3.18 s, sys: 141 ms, total: 3.32 s
-Wall time: 3.32 s
+<pre>CPU times: user 3.01 s, sys: 437 ms, total: 3.44 s
+Wall time: 3.44 s
 </pre>
 </div>
 </div>
@@ -19009,12 +18937,6 @@ Wall time: 3.32 s
       <th>gasResistance</th>
       <th>IAQ</th>
       <th>iaqAccuracy</th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>minute</th>
-      <th>second</th>
       <th>NO</th>
       <th>CO</th>
       <th>NO2</th>
@@ -19052,12 +18974,6 @@ Wall time: 3.32 s
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -19069,12 +18985,6 @@ Wall time: 3.32 s
       <td>152428.230769</td>
       <td>34.100000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>4.615385</td>
-      <td>34.000000</td>
       <td>0.205214</td>
       <td>2.201642</td>
       <td>0.031022</td>
@@ -19098,12 +19008,6 @@ Wall time: 3.32 s
       <td>152099.500000</td>
       <td>35.257500</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>6.500000</td>
-      <td>30.500000</td>
       <td>0.206156</td>
       <td>2.208896</td>
       <td>0.031119</td>
@@ -19127,12 +19031,6 @@ Wall time: 3.32 s
       <td>147429.200000</td>
       <td>72.652500</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>8.500000</td>
-      <td>30.500000</td>
       <td>0.207580</td>
       <td>2.219845</td>
       <td>0.031265</td>
@@ -19156,12 +19054,6 @@ Wall time: 3.32 s
       <td>149288.475000</td>
       <td>69.505000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>10.500000</td>
-      <td>29.900000</td>
       <td>0.209003</td>
       <td>2.230794</td>
       <td>0.031411</td>
@@ -19185,12 +19077,6 @@ Wall time: 3.32 s
       <td>149325.975000</td>
       <td>71.237500</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>12.500000</td>
-      <td>29.500000</td>
       <td>0.210427</td>
       <td>2.241743</td>
       <td>0.031557</td>
@@ -19228,12 +19114,6 @@ Wall time: 3.32 s
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
       <th>2021-09-18 01:12:00</th>
@@ -19243,12 +19123,6 @@ Wall time: 3.32 s
       <td>920534.625000</td>
       <td>134.397500</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>12.500000</td>
-      <td>28.500000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19272,12 +19146,6 @@ Wall time: 3.32 s
       <td>921024.825000</td>
       <td>134.380000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>14.500000</td>
-      <td>28.500000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19301,12 +19169,6 @@ Wall time: 3.32 s
       <td>921339.325000</td>
       <td>134.377500</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>16.500000</td>
-      <td>28.500000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19330,12 +19192,6 @@ Wall time: 3.32 s
       <td>922168.609756</td>
       <td>134.024390</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>18.512195</td>
-      <td>29.073171</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19359,12 +19215,6 @@ Wall time: 3.32 s
       <td>922768.882353</td>
       <td>133.876471</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>20.000000</td>
-      <td>26.000000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19382,7 +19232,7 @@ Wall time: 3.32 s
     </tr>
   </tbody>
 </table>
-<p>156819 rows × 26 columns</p>
+<p>156801 rows × 20 columns</p>
 </div>
 </div>
 
@@ -19395,7 +19245,7 @@ Wall time: 3.32 s
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="3-Minute-Resampling">3 Minute Resampling<a class="anchor-link" href="#3-Minute-Resampling">&#182;</a></h3>
+<h3 id="5-Minute-Resampling">5 Minute Resampling<a class="anchor-link" href="#5-Minute-Resampling">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -19410,6 +19260,9 @@ Wall time: 3.32 s
   <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;5min&#39;</span><span class="p">)</span><span class="o">.</span>
   <span class="n">mean</span><span class="p">()</span>
 <span class="p">)</span>
+<span class="n">df_5min</span> <span class="o">=</span> <span class="n">df_5min</span><span class="p">[</span><span class="o">~</span><span class="n">df_5min</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">df_5min</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df_5min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_5min.pickle.gz&#39;</span><span class="p">)</span>
 <span class="n">df_5min</span>
 </pre></div>
@@ -19431,8 +19284,8 @@ Wall time: 3.32 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 1.31 s, sys: 313 ms, total: 1.62 s
-Wall time: 1.62 s
+<pre>CPU times: user 1.16 s, sys: 291 ms, total: 1.45 s
+Wall time: 1.45 s
 </pre>
 </div>
 </div>
@@ -19469,12 +19322,6 @@ Wall time: 1.62 s
       <th>gasResistance</th>
       <th>IAQ</th>
       <th>iaqAccuracy</th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>minute</th>
-      <th>second</th>
       <th>NO</th>
       <th>CO</th>
       <th>NO2</th>
@@ -19512,12 +19359,6 @@ Wall time: 1.62 s
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -19529,12 +19370,6 @@ Wall time: 1.62 s
       <td>151849.400000</td>
       <td>37.200000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>4.000000</td>
-      <td>15.000000</td>
       <td>0.205071</td>
       <td>2.200547</td>
       <td>0.031007</td>
@@ -19558,12 +19393,6 @@ Wall time: 1.62 s
       <td>150039.409091</td>
       <td>51.973864</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>7.272727</td>
-      <td>31.897727</td>
       <td>0.206726</td>
       <td>2.213276</td>
       <td>0.031177</td>
@@ -19587,12 +19416,6 @@ Wall time: 1.62 s
       <td>149975.940000</td>
       <td>67.172000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>12.000000</td>
-      <td>29.660000</td>
       <td>0.210071</td>
       <td>2.239005</td>
       <td>0.031520</td>
@@ -19616,12 +19439,6 @@ Wall time: 1.62 s
       <td>150897.020000</td>
       <td>65.798000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>17.000000</td>
-      <td>28.890000</td>
       <td>0.213629</td>
       <td>2.266378</td>
       <td>0.031885</td>
@@ -19645,12 +19462,6 @@ Wall time: 1.62 s
       <td>149963.910891</td>
       <td>71.275248</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>2.0</td>
-      <td>12.0</td>
-      <td>6.0</td>
-      <td>22.009901</td>
-      <td>29.029703</td>
       <td>0.217205</td>
       <td>2.293887</td>
       <td>0.032252</td>
@@ -19688,12 +19499,6 @@ Wall time: 1.62 s
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
       <th>2021-09-18 01:00:00</th>
@@ -19703,12 +19508,6 @@ Wall time: 1.62 s
       <td>918660.290000</td>
       <td>135.811000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>2.000000</td>
-      <td>29.710000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19732,12 +19531,6 @@ Wall time: 1.62 s
       <td>920302.740000</td>
       <td>134.243000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>7.000000</td>
-      <td>29.500000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19761,12 +19554,6 @@ Wall time: 1.62 s
       <td>920836.000000</td>
       <td>134.184000</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>12.000000</td>
-      <td>28.600000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19790,12 +19577,6 @@ Wall time: 1.62 s
       <td>921519.306931</td>
       <td>134.372277</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>17.019802</td>
-      <td>28.732673</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19819,12 +19600,6 @@ Wall time: 1.62 s
       <td>922768.882353</td>
       <td>133.876471</td>
       <td>1.0</td>
-      <td>2021.0</td>
-      <td>9.0</td>
-      <td>18.0</td>
-      <td>1.0</td>
-      <td>20.000000</td>
-      <td>26.000000</td>
       <td>0.009174</td>
       <td>0.765217</td>
       <td>0.027826</td>
@@ -19842,7 +19617,7 @@ Wall time: 1.62 s
     </tr>
   </tbody>
 </table>
-<p>62729 rows × 26 columns</p>
+<p>62724 rows × 20 columns</p>
 </div>
 </div>
 
