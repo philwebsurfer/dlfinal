@@ -22,9 +22,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 tf.get_logger().setLevel('ERROR')
 
-BATCH_SIZE=256
-DEBUG=False
-
 def performance_plot(history, a=None, b=None, 
                     metrics=["accuracy", "val_accuracy"],
                     plot_validation=True,
@@ -97,18 +94,21 @@ def performance_plot(history, a=None, b=None,
   plt.show()
 
 def train_model(model, train_data,  validation_data,
-                epochs=10, batch_size=BATCH_SIZE, 
+                epochs=10, batch_size=128, 
                 steps_per_epoch=100, loss='mse', optimizer='adam', 
                 metrics=['mse'], verbose=0, output_datastore=""):
   model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
-  print(plot_model(model_best01a, to_file=os.path.join(output_datastore, 
-                                                         f"{model.name}.png"), 
-           dpi=72, rankdir="TB", show_shapes=True, expand_nested=True))
+  plot_model(model, to_file=os.path.join(output_datastore, 
+      f"{model.name}.png"), dpi=72, rankdir="TB", show_shapes=True, 
+      expand_nested=True)
   cbk = TqdmCallback()
   tiempo = time.time()
+  print(f"Tipo: {type(batch_size)} // batch_size={batch_size}")
+  print(f"Tipo: {type(steps_per_epoch)} // steps={steps_per_epoch}")
+  print(f"Tipo: {type(epochs)} // epochs={epochs}")
   history = model.fit(train_data, validation_data=validation_data,
                       epochs=epochs, steps_per_epoch=steps_per_epoch, 
-                      batch_size=BATCH_SIZE, verbose=verbose, callbacks=[cbk])
+                      batch_size=batch_size, verbose=verbose, callbacks=[cbk])
   clear_output()
   tiempo = time.time() - tiempo
   print(f"Processing Time: {tiempo:.2f} segundos.")
@@ -121,9 +121,11 @@ def train_model(model, train_data,  validation_data,
   #### End Section: Save the Model
   return history
 
-def execute_train(window_size_days=2, stride=1, sampling_rate=1, output_datastore=""):
+def execute_train(window_size_days=2, stride=1, sampling_rate=1, 
+        batch_size=128, steps=100, epochs=10,
+        input_dataset="", output_datastore=""):
     # Data Prep
-    data =  pd.read_pickle(os.path.join(output_datastore, "data/data_5min.pickle.gz"))
+    data =  pd.read_pickle(input_dataset)
     data = data[~data.isna().any(axis=1)]
     excluded_columns = ["iaqAccuracy", "wind_speed", "wind_deg"]
     train, test = train_test_split(data[[x 
@@ -152,7 +154,7 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1, output_datastor
       sequence_length=past,
       sampling_rate=sampling_rate,
       sequence_stride=stride,
-      batch_size=BATCH_SIZE,
+      batch_size=batch_size,
       seed=175904
     )
     test3_iaq = tf.keras.preprocessing.timeseries_dataset_from_array(
@@ -161,14 +163,14 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1, output_datastor
       sequence_length=past,
       sampling_rate=sampling_rate,
       sequence_stride=stride,
-      batch_size=BATCH_SIZE,
+      batch_size=batch_size,
       seed=175904
     )
     print("Time series parameters:")
     print(f"```timeseries_dataset_from_array(\
       sequence_length={past},\
       sampling_rate={sampling_rate},\
-      batch_size={BATCH_SIZE},\
+      batch_size={batch_size},\
       seed=175904)```")
 
     model_best01a = Sequential(name="model_best01a")
@@ -186,8 +188,8 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1, output_datastor
     trained_model01a = train_model(model_best01a, train3_iaq,
                                 validation_data=test3_iaq,
                                 metrics=["mse", "mae"],
-                                epochs=100, steps_per_epoch=10, 
-                                batch_size=BATCH_SIZE, 
+                                epochs=epochs, steps_per_epoch=steps, 
+                                batch_size=batch_size, 
                                 output_datastore=output_datastore)
     
 def usage(argv):
@@ -197,22 +199,24 @@ def usage(argv):
         epilog="Example: %(prog) 'https://data.example.com/data/data.pickle.gz' ", 
         prefix_chars='-')
             
-    parser.add_argument('--window_size_days', '-w', nargs="1", default=2,
-                       help="""Window Size in Days: default 2
-                       """)
-    parser.add_argument('--stride', '-s', nargs="1", default=1,
-                       help="""Window Size in Days: default 2
-                       """)
-    parser.add_argument('--sampling_rate', '-r', nargs="1", default=1,
-                       help="""Window Size in Days: default 2
-                       """)
+    parser.add_argument('--batch_size', '-b', nargs=1, default=128, 
+                       help="""Batch size. Default 128.""")
+    parser.add_argument('--epochs', '-e', nargs=1, default=10, 
+            help="""Training epochs. Default: 10.""")
+    parser.add_argument('--steps', '-t', nargs=1, default=100, 
+            help="""Training steps per epoch. Default: 100.""")
+    parser.add_argument('--window_size_days', nargs=1, default=2, 
+            help="""Window Size in Days. Default: 2.""")
+    parser.add_argument('--stride', '-s', nargs=1, default=1,
+            help="""Window Size in Days. Default: 2.""")
+    parser.add_argument('--sampling_rate', '-r', nargs=1, default=1,
+            help="""Window Size in Days. Default:2.""")
     parser.add_argument('--debug', '-d', action="store_false", default=False,
                        help='Debugging and Verbose Messages.')
     parser.add_argument('input_dataset', nargs=1,
-                        help="""Input dataset URL or Location of the File.
-                        """)
-    parser.add_argument('output_datastore', nargs=1,
-                        help="""Input dataset URL or Location of the File.
+                        help="""Input dataset URL or Location of the File.""")
+    parser.add_argument('output_datastore', nargs=1, default="", 
+                        help="""Output dataset URL or Location of the File.
                         """)
     return parser.parse_args()
 
@@ -223,10 +227,14 @@ def main(argv):
     
     #execute_train(window_size_days=2, stride=1, sampling_rate=1):
     execute_train(window_size_days=args.window_size_days, 
-                  stride=args.stride, 
-                  sampling_rate=args.sampling_rate,
-                  output_datastore=args.output_datastore
-                 )
+            batch_size=int(args.batch_size),
+            epochs=int(args.epochs[0]),
+            steps=int(args.steps[0]),
+            stride=args.stride,
+            sampling_rate=args.sampling_rate,
+            input_dataset=args.input_dataset[0],
+            output_datastore=args.output_datastore[0]
+           )
     
     exit(0)
     
