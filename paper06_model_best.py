@@ -64,7 +64,7 @@ def performance_plot(history, a=None, b=None,
     plt.plot(history['val_loss'][a:b], label='Validation', linewidth=2)
   plt.legend()
   plt.xlabel('Epoch')
-  plt.ylabel(f'Loss')
+  plt.ylabel('Loss')
   quantiles = np.quantile(range(a, b), 
                           [.2, .4, .6, .8]).round(0).astype(int)
   quantiles = np.insert(quantiles, 0, [a])
@@ -226,7 +226,7 @@ def main(argv):
                   stride=args.stride, 
                   sampling_rate=args.sampling_rate,
                   output_datastore=args.output_datastore
-                 ):
+                 )
     
     exit(0)
     
