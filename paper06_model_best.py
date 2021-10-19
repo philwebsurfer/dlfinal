@@ -103,13 +103,12 @@ def train_model(model, train_data,  validation_data,
       expand_nested=True)
   cbk = TqdmCallback()
   tiempo = time.time()
-  print(f"Tipo: {type(batch_size)} // batch_size={batch_size}")
-  print(f"Tipo: {type(steps_per_epoch)} // steps={steps_per_epoch}")
-  print(f"Tipo: {type(epochs)} // epochs={epochs}")
+  #print(f"Tipo: {type(batch_size)} // batch_size={batch_size}")
+  #print(f"Tipo: {type(steps_per_epoch)} // steps={steps_per_epoch}")
+  #print(f"Tipo: {type(epochs)} // epochs={epochs}")
   history = model.fit(train_data, validation_data=validation_data,
                       epochs=epochs, steps_per_epoch=steps_per_epoch, 
                       batch_size=batch_size, verbose=verbose, callbacks=[cbk])
-  clear_output()
   tiempo = time.time() - tiempo
   print(f"Processing Time: {tiempo:.2f} segundos.")
 
@@ -194,22 +193,23 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
     
 def usage(argv):
     parser = argparse.ArgumentParser(
-        description="""Creates a model based on
-        data from a URL pickle and trains it using Neural Networks.""",
-        epilog="Example: %(prog) 'https://data.example.com/data/data.pickle.gz' ", 
+        description="""
+        Creates a model based on data from a URL pickle and trains 
+        it using Neural Networks.""",
+        epilog="Example: %(prog)s https://data.example.com/data/data.pickle.gz . ", 
         prefix_chars='-')
             
-    parser.add_argument('--batch_size', '-b', nargs=1, default=128, 
+    parser.add_argument('--batch_size', '-b', nargs='?', default=128, type=int,
                        help="""Batch size. Default 128.""")
-    parser.add_argument('--epochs', '-e', nargs=1, default=10, 
+    parser.add_argument('--epochs', '-e', nargs='?', default=10, type=int,
             help="""Training epochs. Default: 10.""")
-    parser.add_argument('--steps', '-t', nargs=1, default=100, 
+    parser.add_argument('--steps', '-t', nargs='?', default=100, type=int,
             help="""Training steps per epoch. Default: 100.""")
-    parser.add_argument('--window_size_days', nargs=1, default=2, 
+    parser.add_argument('--window_size_days', '-w', nargs='?', default=2, type=int,
             help="""Window Size in Days. Default: 2.""")
-    parser.add_argument('--stride', '-s', nargs=1, default=1,
+    parser.add_argument('--stride', '-s', nargs='?', default=2, type=int,
             help="""Window Size in Days. Default: 2.""")
-    parser.add_argument('--sampling_rate', '-r', nargs=1, default=1,
+    parser.add_argument('--sampling_rate', '-r', nargs='?', default=1, type=int,
             help="""Window Size in Days. Default:2.""")
     parser.add_argument('--debug', '-d', action="store_false", default=False,
                        help='Debugging and Verbose Messages.')
@@ -228,8 +228,8 @@ def main(argv):
     #execute_train(window_size_days=2, stride=1, sampling_rate=1):
     execute_train(window_size_days=args.window_size_days, 
             batch_size=int(args.batch_size),
-            epochs=int(args.epochs[0]),
-            steps=int(args.steps[0]),
+            epochs=int(args.epochs),
+            steps=int(args.steps),
             stride=args.stride,
             sampling_rate=args.sampling_rate,
             input_dataset=args.input_dataset[0],
