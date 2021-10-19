@@ -123,73 +123,83 @@ def train_model(model, train_data,  validation_data,
 def execute_train(window_size_days=2, stride=1, sampling_rate=1, 
         batch_size=128, steps=100, epochs=10,
         input_dataset="", output_datastore=""):
-    # Data Prep
-    data =  pd.read_pickle(input_dataset)
-    data = data[~data.isna().any(axis=1)]
-    excluded_columns = ["iaqAccuracy", "wind_speed", "wind_deg"]
-    train, test = train_test_split(data[[x 
-                                            for x in data.columns 
-                                            if x not in excluded_columns]], 
-                                   train_size=0.7, random_state=175904, shuffle=False)
-    # Scaling
-    scaler = MinMaxScaler()
-    scaler_f = scaler.fit(train)
-    train2 = scaler_f.transform(train)
-    test2 = scaler_f.transform(test)
-    X_cols = [i for i, x in enumerate(train.columns) 
-              if x not in ["IAQ", "gasResistance"]]
-    Y_cols = [i for i, x in enumerate(train.columns) 
-              if x in ["IAQ", "gasResistance"]]
-    X_train = train2[:, X_cols]
-    Y_train = train2[:, Y_cols]
-    X_test  = test2[:, X_cols]
-    Y_test = test2[:, Y_cols]
+  # Data Prep
+  data =  pd.read_pickle(input_dataset)
+  data = data[~data.isna().any(axis=1)]
+  excluded_columns = ["iaqAccuracy", "wind_speed", "wind_deg"]
+  train, test = train_test_split(data[[x 
+                                          for x in data.columns 
+                                          if x not in excluded_columns]], 
+                                 train_size=0.7, random_state=175904, shuffle=False)
+  # Scaling
+  scaler = MinMaxScaler()
+  scaler_f = scaler.fit(train)
+  train2 = scaler_f.transform(train)
+  test2 = scaler_f.transform(test)
+  X_cols = [i for i, x in enumerate(train.columns) 
+            if x not in ["IAQ", "gasResistance"]]
+  Y_cols = [i for i, x in enumerate(train.columns) 
+            if x in ["IAQ", "gasResistance"]]
+  X_train = train2[:, X_cols]
+  Y_train = train2[:, Y_cols]
+  X_test  = test2[:, X_cols]
+  Y_test = test2[:, Y_cols]
 
-    timedelta_minutes = (data.index[-1] - data.index[-2]).seconds//60
-    past = int(window_size_days) * 24 * 60 // timedelta_minutes
-    train3_iaq = tf.keras.preprocessing.timeseries_dataset_from_array(
-      X_train, 
-      Y_train[:, 1],
-      sequence_length=past,
-      sampling_rate=sampling_rate,
-      sequence_stride=stride,
-      batch_size=batch_size,
-      seed=175904
-    )
-    test3_iaq = tf.keras.preprocessing.timeseries_dataset_from_array(
-      X_test, 
-      Y_test[:, 1],
-      sequence_length=past,
-      sampling_rate=sampling_rate,
-      sequence_stride=stride,
-      batch_size=batch_size,
-      seed=175904
-    )
-    print("Time series parameters:")
-    print(f"```timeseries_dataset_from_array(\
-      sequence_length={past},\
-      sampling_rate={sampling_rate},\
-      batch_size={batch_size},\
-      seed=175904)```")
+  timedelta_minutes = (data.index[-1] - data.index[-2]).seconds//60
+  past = int(window_size_days) * 24 * 60 // timedelta_minutes
+  train3_iaq = tf.keras.preprocessing.timeseries_dataset_from_array(
+    X_train, 
+    Y_train[:, 1],
+    sequence_length=past,
+    sampling_rate=sampling_rate,
+    sequence_stride=stride,
+    batch_size=batch_size,
+    seed=175904
+  )
+  test3_iaq = tf.keras.preprocessing.timeseries_dataset_from_array(
+    X_test, 
+    Y_test[:, 1],
+    sequence_length=past,
+    sampling_rate=sampling_rate,
+    sequence_stride=stride,
+    batch_size=batch_size,
+    seed=175904
+  )
+  print("Time series parameters:")
+  print(f"```timeseries_dataset_from_array(\
+    sequence_length={past},\
+    sampling_rate={sampling_rate},\
+    batch_size={batch_size},\
+    seed=175904)```")
 
-    model_best01a = Sequential(name="model_best01a")
-    model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
-                           name="input00"))
-    model_best01a.add(Conv1D(512, X_train.shape[1], activation='relu', name="conv00"))
-    model_best01a.add(Dropout(0.3, name="dropout00"))
-    model_best01a.add(Dense(units=512, activation='relu', name="dnn"))
-    model_best01a.add(Dropout(0.3))
-    model_best01a.add(Dense(units=256, activation='relu'))
-    model_best01a.add(Dropout(0.5))
-    model_best01a.add(Dense(units=256, activation='relu'))
-    model_best01a.add(Dense(units=1, activation=None, name="output"))
+  model_best01a = Sequential(name="model_best01a")
+  model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
+                         name="input00"))
+  model_best01a.add(Conv1D(512, X_train.shape[1], activation='relu', name="conv00"))
+  model_best01a.add(Dropout(0.3, name="dropout00"))
+  model_best01a.add(Dense(units=512, activation='relu', name="dnn"))
+  model_best01a.add(Dropout(0.3))
+  model_best01a.add(Dense(units=256, activation='relu'))
+  model_best01a.add(Dropout(0.5))
+  model_best01a.add(Dense(units=256, activation='relu'))
+  model_best01a.add(Dense(units=1, activation=None, name="output"))
 
-    trained_model01a = train_model(model_best01a, train3_iaq,
-                                validation_data=test3_iaq,
-                                metrics=["mse", "mae"],
-                                epochs=epochs, steps_per_epoch=steps, 
-                                batch_size=batch_size, 
-                                output_datastore=output_datastore)
+  trained_model01a = train_model(model_best01a, train3_iaq,
+                              validation_data=test3_iaq,
+                              metrics=["mse", "mae"],
+                              epochs=epochs, steps_per_epoch=steps, 
+                              batch_size=batch_size, 
+                              output_datastore=output_datastore)
+  #### Start Section: Save the Model
+  base_dir = os.path.join(output_datastore, model.name)
+  timeseries_params = {
+          "window_size_days": window_size_days, 
+          "stride": stride, 
+          "sampling_rate": sampling_rate,
+          "batch_size": batch_size
+          }
+  dill.dump(timeseries_params, open(f"{base_dir}.tsparams.dill", 'wb'))
+  #### End Section: Save the Model
     
 def usage(argv):
     parser = argparse.ArgumentParser(
