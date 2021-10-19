@@ -165,12 +165,12 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
     batch_size=batch_size,
     seed=175904
   )
-  print("Time series parameters:")
-  print(f"```timeseries_dataset_from_array(\
-    sequence_length={past},\
-    sampling_rate={sampling_rate},\
-    batch_size={batch_size},\
-    seed=175904)```")
+  #print("Time series parameters:")
+  #print(f"```timeseries_dataset_from_array(\
+  #  sequence_length={past},\
+  #  sampling_rate={sampling_rate},\
+  #  batch_size={batch_size},\
+  #  seed=175904)```")
 
   model_best01a = Sequential(name="model_best01a")
   model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
@@ -191,7 +191,7 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
                               batch_size=batch_size, 
                               output_datastore=output_datastore)
   #### Start Section: Save the Model
-  base_dir = os.path.join(output_datastore, model.name)
+  base_dir = os.path.join(output_datastore, model_best01a.name)
   timeseries_params = {
           "window_size_days": window_size_days, 
           "stride": stride, 
