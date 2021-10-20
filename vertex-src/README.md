@@ -20,12 +20,14 @@ Run the python file in this directory
 
 ### Arguments:
 
+```
 -b 10 
--w 8 --sampling_rate=2 --stride=1
---steps=10
+-w 8 --sampling_rate=2 --stride=1 
+--steps=10 
 --epochs=100 
-https://github.com/philwebsurfer/dlfinal/raw/main/data/data_5min.pickle.gz
-gs://investigacion-sensor/output/
+https://github.com/philwebsurfer/dlfinal/raw/main/data/data_5min.pickle.gz 
+gs://investigacion-sensor/output/ 
+```
 
 ### Python Source Distribution
 
