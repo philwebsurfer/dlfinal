@@ -9,11 +9,9 @@ shelve.Unpickler = Unpickler
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from plotnine import *
 from tqdm.keras import TqdmCallback
-from tqdm.notebook import tqdm
 import tensorflow as tf
-from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.models import Sequential, Model, load_model
 from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout, \
   SimpleRNN, Input, Conv1D, Flatten
 from tensorflow.keras.regularizers import l1, l2
@@ -121,7 +119,7 @@ def train_model(model, train_data,  validation_data,
   return history
 
 def execute_train(window_size_days=2, stride=1, sampling_rate=1, 
-        batch_size=128, steps=100, epochs=10,
+        batch_size=128, steps=100, epochs=10, model_file="",
         input_dataset="", output_datastore=""):
   # Data Prep
   data =  pd.read_pickle(input_dataset)
@@ -165,24 +163,20 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
     batch_size=batch_size,
     seed=175904
   )
-  #print("Time series parameters:")
-  #print(f"```timeseries_dataset_from_array(\
-  #  sequence_length={past},\
-  #  sampling_rate={sampling_rate},\
-  #  batch_size={batch_size},\
-  #  seed=175904)```")
 
-  model_best01a = Sequential(name="model_best01a")
-  model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
-                         name="input00"))
-  model_best01a.add(Conv1D(512, X_train.shape[1], activation='relu', name="conv00"))
-  model_best01a.add(Dropout(0.3, name="dropout00"))
-  model_best01a.add(Dense(units=512, activation='relu', name="dnn"))
-  model_best01a.add(Dropout(0.3))
-  model_best01a.add(Dense(units=256, activation='relu'))
-  model_best01a.add(Dropout(0.5))
-  model_best01a.add(Dense(units=256, activation='relu'))
-  model_best01a.add(Dense(units=1, activation=None, name="output"))
+  model_best01a = load_model(model_file)
+  ## Model Creation
+  ## model_best01a = Sequential(name="model_best01a")
+  ## model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
+  ##                        name="input00"))
+  ## model_best01a.add(Conv1D(512, X_train.shape[1], activation='relu', name="conv00"))
+  ## model_best01a.add(Dropout(0.3, name="dropout00"))
+  ## model_best01a.add(Dense(units=512, activation='relu', name="dnn"))
+  ## model_best01a.add(Dropout(0.3))
+  ## model_best01a.add(Dense(units=256, activation='relu'))
+  ## model_best01a.add(Dropout(0.5))
+  ## model_best01a.add(Dense(units=256, activation='relu'))
+  ## model_best01a.add(Dense(units=1, activation=None, name="output"))
 
   trained_model01a = train_model(model_best01a, train3_iaq,
                               validation_data=test3_iaq,
@@ -223,6 +217,8 @@ def usage(argv):
             help="""Window Size in Days. Default:2.""")
     parser.add_argument('--debug', '-d', action="store_false", default=False,
                        help='Debugging and Verbose Messages.')
+    parser.add_argument('--model', '-m', nargs=1, required=True,
+                        help="""H5 model file.""")
     parser.add_argument('input_dataset', nargs=1,
                         help="""Input dataset URL or Location of the File.""")
     parser.add_argument('output_datastore', nargs=1, default="", 
@@ -243,7 +239,8 @@ def main(argv):
             stride=args.stride,
             sampling_rate=args.sampling_rate,
             input_dataset=args.input_dataset[0],
-            output_datastore=args.output_datastore[0]
+            output_datastore=args.output_datastore[0],
+            model_file=args.model[0]
            )
     
     exit(0)
