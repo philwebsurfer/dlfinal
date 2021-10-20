@@ -10,7 +10,7 @@ setup(
     name='sensor-training',
     author='Jorge III Altamirano-Astorga',
     author_email='jorge3a(at)gmail.com',
-    url='https://github.com/philwebsurfer/dlfinal/tree/main/vertex-src',
+    url='https://philwebsurfer.github.io/dlfinal/vertex-src/',
     version='0.1',
     install_requires=REQUIRED_PACKAGES,
     packages=find_packages(),
