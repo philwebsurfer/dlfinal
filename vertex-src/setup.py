@@ -14,5 +14,6 @@ setup(
     version='0.1',
     install_requires=REQUIRED_PACKAGES,
     packages=find_packages(),
+    include_package_data=True,
     description='Training application for the "Air Quality Sensor" deep learning research.'
 )
