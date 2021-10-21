@@ -36,6 +36,16 @@ gs://investigacion-sensor/output/
 
 python3 setup.py sdist --formats=gztar
 
+### Python Module
+
+This is the module fed into Python:```trainer.task```
+
+This trainslates into running as:
+```
+python3 -m trainer.task -b 10 -w 8 --sampling_rate=2 --stride=1 --steps=10 --epochs=100 -m ../model_best01a.h5  https://github.com/philwebsurfer/dlfinal/raw/main/data/data_5min.pickle.gz gs://investigacion-sensor/output/model
+```
+
+
 ## GCP Shell
 
 To check the execution of the job run:
