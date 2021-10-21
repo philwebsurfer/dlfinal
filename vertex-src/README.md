@@ -27,7 +27,7 @@ Run the python file in this directory
 --stride=1 
 --steps=10 
 --epochs=100 
--m gs://investigacion-sensor/output/model/model_best01a.h5
+-m gs://investigacion-sensor/output/model_best01a.h5
 https://github.com/philwebsurfer/dlfinal/raw/main/data/data_5min.pickle.gz 
 gs://investigacion-sensor/output/
 ```
