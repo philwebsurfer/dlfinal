@@ -40,6 +40,7 @@ python3 setup.py sdist --formats=gztar
 To check the execution of the job run:
 
 ```
+gcloud config set ai/region us-central1
 gcloud ai custom-jobs list
 ```
 
