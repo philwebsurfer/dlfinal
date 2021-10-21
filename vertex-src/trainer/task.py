@@ -221,9 +221,9 @@ def usage(argv):
                         help="""H5 model file.""")
     parser.add_argument('input_dataset', nargs=1,
                         help="""Input dataset URL or Location of the File.""")
-    #parser.add_argument('output_datastore', nargs=1, default="", 
-    #                    help="""Output dataset URL or Location of the File.
-    #                    """)
+    parser.add_argument('output_datastore', nargs=1, default="", 
+                        help="""Output dataset URL or Location of the File.
+                        """)
     return parser.parse_args()
 
 def main(argv):
@@ -237,10 +237,11 @@ def main(argv):
             'The `AIP_MODEL_DIR` environment variable has not been' +
             'set. See https://cloud.google.com/ai-platform-unified/docs/tutorials/image-recognition-custom/training'
         )
-    output_directory = os.environ['AIP_MODEL_DIR']
-    model_file = os.path.join(output_directory, args.model[0].strip())
-    logging.info(f"training python script: AIP_MODEL_DIR={output_directory}")
-    logging.info(f"training python script: model_file={model_file}")
+    output_dir = args.output_datastore[0].strip()
+    model_file = args.model[0].strip()
+    logging.info(f"Training python script: AIP_MODEL_DIR={os.environ['AIP_MODEL_DIR']}")
+    logging.info(f"Training python script: output_dir={output_dir}")
+    logging.info(f"Training python script: model_file={model_file}")
     
     #execute_train(window_size_days=2, stride=1, sampling_rate=1):
     execute_train(window_size_days=args.window_size_days, 
@@ -250,7 +251,7 @@ def main(argv):
             stride=args.stride,
             sampling_rate=args.sampling_rate,
             input_dataset=args.input_dataset[0],
-            output_datastore=output_directory,
+            output_datastore=output_dir,
             model_file=model_file
            )
     
