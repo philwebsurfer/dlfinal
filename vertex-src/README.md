@@ -21,7 +21,7 @@ Run the python file in this directory
 ### Arguments:
 
 ```
--b 10 
+-b 256
 -w 8 
 --sampling_rate=2 
 --stride=1 
