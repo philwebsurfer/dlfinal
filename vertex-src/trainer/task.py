@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 #@author: Jorge III Altamirano-Astorga
+import tensorflow as tf
+from tensorflow.keras.models import Sequential, Model, load_model
+from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout, \
+  SimpleRNN, Input, Conv1D, Flatten
+from tensorflow.keras.regularizers import l1, l2
+from tensorflow.keras.utils import plot_model
 import re, os, sys, shelve, time, dill, io, logging
 import argparse #args from cli
 from pickle import PicklingError
@@ -10,12 +16,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm.keras import TqdmCallback
-import tensorflow as tf
-from tensorflow.keras.models import Sequential, Model, load_model
-from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout, \
-  SimpleRNN, Input, Conv1D, Flatten
-from tensorflow.keras.regularizers import l1, l2
-from tensorflow.keras.utils import plot_model
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 tf.get_logger().setLevel('ERROR')
