@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
-import re, os, sys, shelve, time, dill, io
+#@author: Jorge III Altamirano-Astorga
+import re, os, sys, shelve, time, dill, io, logging
 import argparse #args from cli
 from pickle import PicklingError
 from dill import Pickler, Unpickler
@@ -108,7 +108,7 @@ def train_model(model, train_data,  validation_data,
                       epochs=epochs, steps_per_epoch=steps_per_epoch, 
                       batch_size=batch_size, verbose=verbose, callbacks=[cbk])
   tiempo = time.time() - tiempo
-  print(f"Processing Time: {tiempo:.2f} segundos.")
+  logging.info(f"Processing Time: {tiempo:.2f} segundos.")
 
   #### Start Section: Save the Model
   base_dir = os.path.join(output_datastore, model.name)
@@ -221,15 +221,26 @@ def usage(argv):
                         help="""H5 model file.""")
     parser.add_argument('input_dataset', nargs=1,
                         help="""Input dataset URL or Location of the File.""")
-    parser.add_argument('output_datastore', nargs=1, default="", 
-                        help="""Output dataset URL or Location of the File.
-                        """)
+    #parser.add_argument('output_datastore', nargs=1, default="", 
+    #                    help="""Output dataset URL or Location of the File.
+    #                    """)
     return parser.parse_args()
 
 def main(argv):
     ### read cli arguments
     args = usage(argv)
     #print(args)
+
+    ## Google Environment
+    if 'AIP_MODEL_DIR' not in os.environ:
+        raise KeyError(
+            'The `AIP_MODEL_DIR` environment variable has not been' +
+            'set. See https://cloud.google.com/ai-platform-unified/docs/tutorials/image-recognition-custom/training'
+        )
+    output_directory = os.environ['AIP_MODEL_DIR']
+    model_file = os.path.join(output_directory, args.model[0])
+    logging.info(f"training python script: AIP_MODEL_DIR={output_directory}")
+    logging.info(f"training python script: model_file={model_file}")
     
     #execute_train(window_size_days=2, stride=1, sampling_rate=1):
     execute_train(window_size_days=args.window_size_days, 
@@ -239,8 +250,8 @@ def main(argv):
             stride=args.stride,
             sampling_rate=args.sampling_rate,
             input_dataset=args.input_dataset[0],
-            output_datastore=args.output_datastore[0],
-            model_file=args.model[0]
+            output_datastore=output_directory,
+            model_file=model_file
            )
     
     exit(0)
