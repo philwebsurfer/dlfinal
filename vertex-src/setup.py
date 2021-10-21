@@ -11,7 +11,7 @@ setup(
     author='Jorge III Altamirano-Astorga',
     author_email='jorge3a(at)gmail.com',
     url='https://philwebsurfer.github.io/dlfinal/vertex-src/',
-    version='0.1',
+    version='0.2',
     install_requires=REQUIRED_PACKAGES,
     packages=find_packages(),
     include_package_data=True,
