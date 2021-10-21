@@ -238,7 +238,7 @@ def main(argv):
             'set. See https://cloud.google.com/ai-platform-unified/docs/tutorials/image-recognition-custom/training'
         )
     output_directory = os.environ['AIP_MODEL_DIR']
-    model_file = os.path.join(output_directory, args.model[0])
+    model_file = os.path.join(output_directory, args.model[0].strip())
     logging.info(f"training python script: AIP_MODEL_DIR={output_directory}")
     logging.info(f"training python script: model_file={model_file}")
     
