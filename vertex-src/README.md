@@ -36,7 +36,10 @@ python3 setup.py sdist --formats=gztar
 ## GCP Shell
 
 To check the execution of the job run:
+
+```
 gcloud ai custom-jobs list
+```
 
 ## References
 
