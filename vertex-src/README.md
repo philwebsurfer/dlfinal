@@ -59,6 +59,22 @@ gcloud ai custom-jobs list
 
 * <https://codelabs.developers.google.com/vertex_custom_training_prediction>
 
-* <https://cloud.google.com/vertex-ai/docs/tutorials/image-recognition-custom/training#2_run_a_custom_training_pipeline>
+* <https://cloud.google.com/vertex-ai/docs/training/create-training-pipeline#custom-job-model-upload>
 
+* <https://cloud.google.com/vertex-ai/docs/tutorials/image-recognition-custom/training>
 
+* <https://cloud.google.com/vertex-ai/docs/training/pre-built-containers>
+
+* <https://cloud.google.com/vertex-ai/docs/training/create-python-pre-built-container>
+
+* <https://cloud.google.com/vertex-ai/docs/tutorials/image-recognition-custom/training>
+
+* <https://cloud.google.com/vertex-ai/docs/training/code-requirements>
+
+* <https://docs.python.org/3/distutils/sourcedist.html>
+
+* <https://docs.python.org/3/distutils/setupscript.html>
+
+* <https://cloud.google.com/vertex-ai/pricing#americas>
+
+* <https://cloud.google.com/compute/gpus-pricing>
