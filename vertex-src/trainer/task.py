@@ -164,19 +164,19 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
     seed=175904
   )
 
-  model_best01a = load_model(model_file)
+  ## model_best01a = load_model(model_file)
   ## Model Creation
-  ## model_best01a = Sequential(name="model_best01a")
-  ## model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
-  ##                        name="input00"))
-  ## model_best01a.add(Conv1D(512, X_train.shape[1], activation='relu', name="conv00"))
-  ## model_best01a.add(Dropout(0.3, name="dropout00"))
-  ## model_best01a.add(Dense(units=512, activation='relu', name="dnn"))
-  ## model_best01a.add(Dropout(0.3))
-  ## model_best01a.add(Dense(units=256, activation='relu'))
-  ## model_best01a.add(Dropout(0.5))
-  ## model_best01a.add(Dense(units=256, activation='relu'))
-  ## model_best01a.add(Dense(units=1, activation=None, name="output"))
+  model_best01a = Sequential(name="model_best01a")
+  model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
+                         name="input00"))
+  model_best01a.add(Conv1D(512, X_train.shape[1], activation='relu', name="conv00"))
+  model_best01a.add(Dropout(0.3, name="dropout00"))
+  model_best01a.add(Dense(units=512, activation='relu', name="dnn"))
+  model_best01a.add(Dropout(0.3))
+  model_best01a.add(Dense(units=256, activation='relu'))
+  model_best01a.add(Dropout(0.5))
+  model_best01a.add(Dense(units=256, activation='relu'))
+  model_best01a.add(Dense(units=1, activation=None, name="output"))
 
   trained_model01a = train_model(model_best01a, train3_iaq,
                               validation_data=test3_iaq,
@@ -217,8 +217,8 @@ def usage(argv):
             help="""Window Size in Days. Default:2.""")
     parser.add_argument('--debug', '-d', action="store_false", default=False,
                        help='Debugging and Verbose Messages.')
-    parser.add_argument('--model', '-m', nargs=1, required=True,
-                        help="""H5 model file.""")
+    #parser.add_argument('--model', '-m', nargs=1, required=True,
+    #                    help="""H5 model file.""")
     parser.add_argument('input_dataset', nargs=1,
                         help="""Input dataset URL or Location of the File.""")
     parser.add_argument('output_datastore', nargs=1, default="", 
@@ -238,10 +238,11 @@ def main(argv):
             'set. See https://cloud.google.com/ai-platform-unified/docs/tutorials/image-recognition-custom/training'
         )
     output_dir = args.output_datastore[0].strip()
-    model_file = args.model[0].strip()
+    model_file = ""
+    #model_file = args.model[0].strip()
     logging.info(f"Training python script: AIP_MODEL_DIR={os.environ['AIP_MODEL_DIR']}")
     logging.info(f"Training python script: output_dir={output_dir}")
-    logging.info(f"Training python script: model_file={model_file}")
+    #logging.info(f"Training python script: model_file={model_file}")
     
     #execute_train(window_size_days=2, stride=1, sampling_rate=1):
     execute_train(window_size_days=args.window_size_days, 
