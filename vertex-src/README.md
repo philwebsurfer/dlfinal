@@ -14,6 +14,12 @@ numpy tensorflow scikit_learn numpy pandas
 
 _Source: <https://cloud.google.com/vertex-ai/docs/training/pre-built-containers>._
 
+## Building the Source Distribution
+
+```
+python3 setup.py sdist --formats=gztar
+```
+
 ## Execution
 
 Run the python file in this directory
