@@ -242,6 +242,12 @@ def main(argv):
     #model_file = args.model[0].strip()
     logging.info(f"Training python script: AIP_MODEL_DIR={os.environ['AIP_MODEL_DIR']}")
     logging.info(f"Training python script: output_dir={output_dir}")
+    rootdir = os.listdir('/')
+    rootdir = ", ".join(rootdir)
+    logging.info(f"Directory listing /gcsdir: {rootdir}")
+    gcsdir = os.listdir('/gcs/')
+    gcsdir = ", ".join(gcsdir)
+    logging.info(f"Directory listing /gcsdir: {gcsdir}")
     #logging.info(f"Training python script: model_file={model_file}")
     
     #execute_train(window_size_days=2, stride=1, sampling_rate=1):
