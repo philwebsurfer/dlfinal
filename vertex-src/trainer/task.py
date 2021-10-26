@@ -14,88 +14,17 @@ shelve.Pickler = Pickler
 shelve.Unpickler = Unpickler
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from tqdm.keras import TqdmCallback
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 tf.get_logger().setLevel('ERROR')
-
-def performance_plot(history, a=None, b=None, 
-                    metrics=["accuracy", "val_accuracy"],
-                    plot_validation=True,
-                    title="Performance Plots for Model."):
-  """
-  Prints performance plot from a, to b on a history dict.
-  
-  Inputs:
-  history: dict containing "loss" and "accuracy" keys
-  a: epoch start
-  b. last epoch
-  metrics: plot these metrics (train and validation). Always 2.
-  plot_validation: boolean indicating if validation data should be plotted.
-  a: from this epoch
-  b: to this epoch    
-  """
-  if a is None:
-      a = 0
-  if b is None:
-      b = len(history['loss'])
-  a = np.min((a,b))
-  b = np.max((a,b))
-
-  imgrows = (len(metrics) + 1) / 2
-  imgrows = np.round(imgrows, 0)
-  imgrows = int(imgrows)
-  #print(imgrows)
-
-  # Plot loss
-  plt.figure(figsize=(14, 5
-                      *imgrows))
-  plt.suptitle(title)
-  plt.subplot(imgrows, 2, 1)
-  plt.title('Loss')
-  plt.plot(history['loss'][a:b], label='Training', linewidth=2)
-  if plot_validation:
-    plt.plot(history['val_loss'][a:b], label='Validation', linewidth=2)
-  plt.legend()
-  plt.xlabel('Epoch')
-  plt.ylabel('Loss')
-  quantiles = np.quantile(range(a, b), 
-                          [.2, .4, .6, .8]).round(0).astype(int)
-  quantiles = np.insert(quantiles, 0, [a])
-  quantiles += 1
-  quantiles = np.append(quantiles, [b-1])
-  plt.xticks(ticks=quantiles-a,
-              labels=quantiles)
-  plt.grid(True)
-
-  # Plot accuracy
-  for i, metric in enumerate(metrics): 
-    #print(f"metric: {metric}, i: {i}")
-    #print(f"mean metric: {np.mean(history[metric])}")
-    plt.subplot(imgrows, 2, i+2)
-    plt.title(metric)
-    plt.plot(history[metric][a:b], label='Training', 
-              linewidth=2)
-    if plot_validation:
-      plt.plot(history["val_" + metric][a:b], 
-                label='Validation', linewidth=2)
-    plt.legend()
-    plt.xlabel('Epoch')
-    plt.ylabel(metric)
-    #plt.xlim(a, b)
-    #print(range(0, b-a))
-    plt.xticks(ticks=quantiles-a, 
-                labels=quantiles)
-    plt.grid(True)
-
-  plt.show()
 
 def train_model(model, train_data,  validation_data,
                 epochs=10, batch_size=128, 
                 steps_per_epoch=100, loss='mse', optimizer='adam', 
                 metrics=['mse'], verbose=0, output_datastore=""):
   model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
+  logging.info(f'Saving plot file: {model.name}.png')
   plot_model(model, to_file=os.path.join(output_datastore, 
       f"{model.name}.png"), dpi=72, rankdir="TB", show_shapes=True, 
       expand_nested=True)
@@ -104,6 +33,7 @@ def train_model(model, train_data,  validation_data,
   #print(f"Tipo: {type(batch_size)} // batch_size={batch_size}")
   #print(f"Tipo: {type(steps_per_epoch)} // steps={steps_per_epoch}")
   #print(f"Tipo: {type(epochs)} // epochs={epochs}")
+  logging.info(f'Training start...')
   history = model.fit(train_data, validation_data=validation_data,
                       epochs=epochs, steps_per_epoch=steps_per_epoch, 
                       batch_size=batch_size, verbose=verbose, callbacks=[cbk])
@@ -112,8 +42,11 @@ def train_model(model, train_data,  validation_data,
 
   #### Start Section: Save the Model
   base_dir = os.path.join(output_datastore, model.name)
+  logging.info(f'Saving model file: {base_dir}.h5')
   model.save(f"{base_dir}.h5")
+  logging.info(f'Saving time file: {base_dir}.time.dill')
   dill.dump(tiempo, open(f"{base_dir}.time.dill", 'wb'))
+  logging.info(f'Saving history file: {base_dir}.hist.dill')
   dill.dump(history.history, open(f"{base_dir}.hist.dill", 'wb'))
   #### End Section: Save the Model
   return history
@@ -122,6 +55,7 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
         batch_size=128, steps=100, epochs=10, model_file="",
         input_dataset="", output_datastore=""):
   # Data Prep
+  logging.info(f'Loading input dataset: {input_dataset}')
   data =  pd.read_pickle(input_dataset)
   data = data[~data.isna().any(axis=1)]
   excluded_columns = ["iaqAccuracy", "wind_speed", "wind_deg"]
@@ -179,6 +113,7 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
   ## model_best01a.add(Dense(units=256, activation='relu'))
   ## model_best01a.add(Dense(units=1, activation=None, name="output"))
 
+  logging.info(f'Entering train_model function...')
   trained_model01a = train_model(model_best01a, train3_iaq,
                               validation_data=test3_iaq,
                               metrics=["mse", "mae"],
@@ -241,17 +176,16 @@ def main(argv):
     output_dir = args.output_datastore[0].strip()
     #model_file = ""
     model_file = args.model[0].strip()
-    logging.info(f"Training python script: AIP_MODEL_DIR={os.environ['AIP_MODEL_DIR']}")
-    logging.info(f"Training python script: output_dir={output_dir}")
-    rootdir = os.listdir('/')
-    rootdir = ", ".join(rootdir)
-    logging.info(f"Directory listing /: {rootdir}")
-    gcsdir = os.listdir('/gcs/investigacion-sensor/output/')
-    gcsdir = ", ".join(gcsdir)
-    logging.info(f"Directory listing /gcs/investigacion-sensor/output: {gcsdir}")
+    ## logging.info(f"Training python script: AIP_MODEL_DIR={os.environ['AIP_MODEL_DIR']}")
+    ## logging.info(f"Training python script: output_dir={output_dir}")
+    ## rootdir = os.listdir('/')
+    ## rootdir = ", ".join(rootdir)
+    ## logging.info(f"Directory listing /: {rootdir}")
+    ## gcsdir = os.listdir('/gcs/investigacion-sensor/output/')
+    ## gcsdir = ", ".join(gcsdir)
+    ## logging.info(f"Directory listing /gcs/investigacion-sensor/output: {gcsdir}")
     #logging.info(f"Training python script: model_file={model_file}")
     
-    #execute_train(window_size_days=2, stride=1, sampling_rate=1):
     execute_train(window_size_days=args.window_size_days, 
             batch_size=int(args.batch_size),
             epochs=int(args.epochs),
