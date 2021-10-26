@@ -164,7 +164,7 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
     seed=175904
   )
 
-  logging.info(f"Trying to load {model_file}')
+  logging.info(f"Trying to load {model_file}")
   model_best01a = load_model(model_file)
   ## Model Creation
   ## model_best01a = Sequential(name="model_best01a")
