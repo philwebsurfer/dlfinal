@@ -245,9 +245,9 @@ def main(argv):
     rootdir = os.listdir('/')
     rootdir = ", ".join(rootdir)
     logging.info(f"Directory listing /: {rootdir}")
-    gcsdir = os.listdir('/gcs/investigacion-sensor/')
+    gcsdir = os.listdir('/gcs/investigacion-sensor/output/')
     gcsdir = ", ".join(gcsdir)
-    logging.info(f"Directory listing /gcsdir: {gcsdir}")
+    logging.info(f"Directory listing /gcs/investigacion-sensor/output: {gcsdir}")
     #logging.info(f"Training python script: model_file={model_file}")
     
     #execute_train(window_size_days=2, stride=1, sampling_rate=1):
