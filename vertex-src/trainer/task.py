@@ -99,36 +99,27 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
   )
 
   logging.info(f"Trying to load {model_file}")
-  model_best01a = load_model(model_file)
-  ## Model Creation
-  ## model_best01a = Sequential(name="model_best01a")
-  ## model_best01a.add(Input(shape=(X_train.shape[0], X_train.shape[1], ), 
-  ##                        name="input00"))
-  ## model_best01a.add(Conv1D(512, X_train.shape[1], activation='relu', name="conv00"))
-  ## model_best01a.add(Dropout(0.3, name="dropout00"))
-  ## model_best01a.add(Dense(units=512, activation='relu', name="dnn"))
-  ## model_best01a.add(Dropout(0.3))
-  ## model_best01a.add(Dense(units=256, activation='relu'))
-  ## model_best01a.add(Dropout(0.5))
-  ## model_best01a.add(Dense(units=256, activation='relu'))
-  ## model_best01a.add(Dense(units=1, activation=None, name="output"))
+  model = load_model(model_file)
 
   logging.info(f'Entering train_model function...')
-  trained_model01a = train_model(model_best01a, train3_iaq,
+  trained_model = train_model(model, train3_iaq,
                               validation_data=test3_iaq,
                               metrics=["mse", "mae"],
                               epochs=epochs, steps_per_epoch=steps, 
                               batch_size=batch_size, 
                               output_datastore=output_datastore)
   #### Start Section: Save the Model
-  base_dir = os.path.join(output_datastore, model_best01a.name)
+  base_dir = os.path.join(output_datastore, model.name)
   timeseries_params = {
           "window_size_days": window_size_days, 
           "stride": stride, 
           "sampling_rate": sampling_rate,
-          "batch_size": batch_size
+          "batch_size": batch_size,
+          "model_n_params": f"{model.count_params():3,}"
           }
   dill.dump(timeseries_params, open(f"{base_dir}.tsparams.dill", 'wb'))
+  scaler_path = os.path.join(output_datastore, "scaler.dill")
+  dill.dump(scaler_f, open(scaler_path, 'wb'))
   #### End Section: Save the Model
     
 def usage(argv):
