@@ -20,7 +20,7 @@ _Professor: Dr. Edgar Francisco Román-Rangel._
 
 5. Data Sources Aggretation [[html]](https://philwebsurfer.github.io/dlfinal/paper05_data_aggregation.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/paper05_data_aggregation.pdf)
 
-6. Model Testing [[html]](https://philwebsurfer.github.io/dlfinal/paper06_model_best.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/paper06_model_best.pdf)
+6. Model Testing [[html]](https://philwebsurfer.github.io/dlfinal/paper06_creating_models_for_train.html) [[pdf]](https://philwebsurfer.github.io/dlfinal/paper06_creating_models_for_train.pdf)
 
 7. Model Training using Google Vertex AI [[html]](https://philwebsurfer.github.io/dlfinal/vertex-src/)
 
