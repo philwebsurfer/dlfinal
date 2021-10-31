@@ -24,4 +24,7 @@ _Professor: Dr. Edgar Francisco Román-Rangel._
 
 7. Model Training using Google Vertex AI [[html]](https://philwebsurfer.github.io/dlfinal/vertex-src/)
 
+8. Model Comparisons [[html]](paper07_model_comparison.html) [[pdf]](paper07_model_comparison.pdf)
+
+
 # [Final Exam](https://philwebsurfer.github.io/dlfinal/examen)
