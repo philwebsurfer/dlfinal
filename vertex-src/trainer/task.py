@@ -49,6 +49,7 @@ def train_model(model, train_data,  validation_data,
   logging.info(f'Saving history file: {base_dir}.hist.dill')
   dill.dump(history.history, open(f"{base_dir}.hist.dill", 'wb'))
   #### End Section: Save the Model
+  #### Start Section: Hyperparameter Tuning
   try: 
       import hypertune
 
@@ -60,6 +61,7 @@ def train_model(model, train_data,  validation_data,
               )
   except:
       pass
+  #### End Section: Hyperparameter Tuning
   return history
 
 def execute_train(window_size_days=2, stride=1, sampling_rate=1, 
