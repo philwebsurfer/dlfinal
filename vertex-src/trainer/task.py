@@ -132,6 +132,7 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
           }
   dill.dump(timeseries_params, open(f"{base_dir}.tsparams.dill", 'wb'))
   scaler_path = os.path.join(output_datastore, "scaler.dill")
+  scaler_f = scaler.fit(train["IAQ"])
   dill.dump(scaler_f, open(scaler_path, 'wb'))
   #### End Section: Save the Model
     
