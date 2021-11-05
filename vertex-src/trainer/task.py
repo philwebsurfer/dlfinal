@@ -49,6 +49,17 @@ def train_model(model, train_data,  validation_data,
   logging.info(f'Saving history file: {base_dir}.hist.dill')
   dill.dump(history.history, open(f"{base_dir}.hist.dill", 'wb'))
   #### End Section: Save the Model
+  try: 
+      import hypertune
+
+      hpt = hypertune.HyperTune()
+      htp.report_hyperparameter_tuning_metric(
+              hyperparameter_metric_tag='mse',
+              metric_value=history.history["val_loss"],
+              global_step=epochs
+              )
+  except:
+      pass
   return history
 
 def execute_train(window_size_days=2, stride=1, sampling_rate=1, 
