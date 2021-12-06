@@ -54,7 +54,7 @@ def train_model(model, train_data,  validation_data,
       import hypertune
 
       hpt = hypertune.HyperTune()
-      htp.report_hyperparameter_tuning_metric(
+      hpt.report_hyperparameter_tuning_metric(
               hyperparameter_metric_tag='mse',
               metric_value=history.history["val_loss"],
               global_step=epochs
