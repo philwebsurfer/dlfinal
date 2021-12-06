@@ -56,7 +56,7 @@ def train_model(model, train_data,  validation_data,
       hpt = hypertune.HyperTune()
       hpt.report_hyperparameter_tuning_metric(
               hyperparameter_metric_tag='mse',
-              metric_value=history.history["val_loss"],
+              metric_value=history.history["val_loss"][-1],
               global_step=epochs
               )
   except Exception as e:
