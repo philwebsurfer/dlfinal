@@ -61,6 +61,16 @@ gcloud config set ai/region us-central1
 gcloud ai custom-jobs list
 ```
 
+## Hyperparameter Tuning Job
+
+```Model``` parameter for the hyperparameter tuning. With a categorical settings and it should go through all the models:
+
+```
+/gcs/investigacion-sensor/output/ParNet00.h5,/gcs/investigacion-sensor/output/model_best01a.h5,/gcs/investigacion-sensor/output/model_best03a.h5,/gcs/investigacion-sensor/output/model_best03b.h5,/gcs/investigacion-sensor/output/model_conv00.h5,/gcs/investigacion-sensor/output/model_conv02.h5,/gcs/investigacion-sensor/output/model_dnn00.h5,/gcs/investigacion-sensor/output/model_dnn01.h5,/gcs/investigacion-sensor/output/model_dnn02.h5,/gcs/investigacion-sensor/output/model_lstm00.h5,/gcs/investigacion-sensor/output/model_lstm02.h5,/gcs/investigacion-sensor/output/model_rnn00.h5,/gcs/investigacion-sensor/output/model_rnn02.h5
+```
+
+And the minimizing metric is ```mse```.
+
 ## References
 
 * <https://codelabs.developers.google.com/vertex_custom_training_prediction>
