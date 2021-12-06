@@ -59,7 +59,10 @@ def train_model(model, train_data,  validation_data,
               metric_value=history.history["val_loss"],
               global_step=epochs
               )
-  except:
+  except Exception as e:
+      logging.error("Start error of hypertune")
+      logging.error(e)
+      logging.error("End error of hypertune")
       pass
   #### End Section: Hyperparameter Tuning
   return history
