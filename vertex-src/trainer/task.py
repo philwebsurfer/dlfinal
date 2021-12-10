@@ -54,12 +54,15 @@ def train_model(model, train_data,  validation_data,
       import hypertune
 
       hpt = hypertune.HyperTune()
-      htp.report_hyperparameter_tuning_metric(
+      hpt.report_hyperparameter_tuning_metric(
               hyperparameter_metric_tag='mse',
-              metric_value=history.history["val_loss"],
+              metric_value=history.history["val_loss"][-1],
               global_step=epochs
               )
-  except:
+  except Exception as e:
+      logging.error("Start error of hypertune")
+      logging.error(e)
+      logging.error("End error of hypertune")
       pass
   #### End Section: Hyperparameter Tuning
   return history
@@ -132,8 +135,8 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
           }
   dill.dump(timeseries_params, open(f"{base_dir}.tsparams.dill", 'wb'))
   scaler_path = os.path.join(output_datastore, "scaler.dill")
-  scaler_f = scaler.fit(train["IAQ"])
-  dill.dump(scaler_f, open(scaler_path, 'wb'))
+  scaler_iaq = MinMaxScaler().fit(train[["IAQ"]])
+  dill.dump(scaler_iaq, open(scaler_path, 'wb'))
   #### End Section: Save the Model
     
 def usage(argv):
