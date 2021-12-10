@@ -16572,8 +16572,8 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 1.03 s, sys: 146 ms, total: 1.17 s
-Wall time: 1.17 s
+<pre>CPU times: user 988 ms, sys: 151 ms, total: 1.14 s
+Wall time: 1.14 s
 </pre>
 </div>
 </div>
@@ -16664,8 +16664,8 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 1.87 s, sys: 1.12 s, total: 2.99 s
-Wall time: 2.99 s
+<pre>CPU times: user 1.9 s, sys: 1.05 s, total: 2.95 s
+Wall time: 2.95 s
 </pre>
 </div>
 </div>
@@ -17135,8 +17135,8 @@ Wall time: 2.99 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 489 ms, sys: 655 ms, total: 1.14 s
-Wall time: 1.14 s
+<pre>CPU times: user 327 ms, sys: 254 ms, total: 581 ms
+Wall time: 580 ms
 </pre>
 </div>
 </div>
@@ -18460,8 +18460,8 @@ Wall time: 1.14 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 21.3 s, sys: 12.5 s, total: 33.8 s
-Wall time: 33.8 s
+<pre>CPU times: user 19.5 s, sys: 5.57 s, total: 25.1 s
+Wall time: 25.1 s
 </pre>
 </div>
 </div>
@@ -18514,8 +18514,8 @@ Wall time: 33.8 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 6.61 s, sys: 640 ms, total: 7.25 s
-Wall time: 7.25 s
+<pre>CPU times: user 6.53 s, sys: 244 ms, total: 6.77 s
+Wall time: 6.77 s
 </pre>
 </div>
 </div>
@@ -18899,8 +18899,8 @@ Wall time: 7.25 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 3.01 s, sys: 437 ms, total: 3.44 s
-Wall time: 3.44 s
+<pre>CPU times: user 2.91 s, sys: 152 ms, total: 3.06 s
+Wall time: 3.06 s
 </pre>
 </div>
 </div>
@@ -19284,8 +19284,8 @@ Wall time: 3.44 s
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>CPU times: user 1.16 s, sys: 291 ms, total: 1.45 s
-Wall time: 1.45 s
+<pre>CPU times: user 1.15 s, sys: 102 ms, total: 1.25 s
+Wall time: 1.25 s
 </pre>
 </div>
 </div>
@@ -19618,6 +19618,1161 @@ Wall time: 1.45 s
   </tbody>
 </table>
 <p>62724 rows × 20 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="10-Minute-Resampling">10 Minute Resampling<a class="anchor-link" href="#10-Minute-Resampling">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">df_10min</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">df2</span><span class="o">.</span>
+  <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;10min&#39;</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df_10min</span> <span class="o">=</span> <span class="n">df_10min</span><span class="p">[</span><span class="o">~</span><span class="n">df_10min</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">df_10min</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_10min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_10min.pickle.gz&#39;</span><span class="p">)</span>
+<span class="n">df_10min</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 790 ms, sys: 109 ms, total: 900 ms
+Wall time: 898 ms
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>NO</th>
+      <th>CO</th>
+      <th>NO2</th>
+      <th>NOx</th>
+      <th>O3</th>
+      <th>PM10</th>
+      <th>PM2.5</th>
+      <th>SO2</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:00:00</th>
+      <td>21.681183</td>
+      <td>777.390538</td>
+      <td>43.394409</td>
+      <td>150136.720430</td>
+      <td>51.179570</td>
+      <td>1.0</td>
+      <td>0.206637</td>
+      <td>2.212591</td>
+      <td>0.031168</td>
+      <td>0.206916</td>
+      <td>0.002000</td>
+      <td>45.503650</td>
+      <td>22.125912</td>
+      <td>0.004042</td>
+      <td>14.885511</td>
+      <td>13.552153</td>
+      <td>1020.958029</td>
+      <td>43.041971</td>
+      <td>2.462135</td>
+      <td>105.383212</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:10:00</th>
+      <td>21.551100</td>
+      <td>777.277100</td>
+      <td>42.806950</td>
+      <td>150436.480000</td>
+      <td>66.485000</td>
+      <td>1.0</td>
+      <td>0.211850</td>
+      <td>2.252692</td>
+      <td>0.031703</td>
+      <td>0.206649</td>
+      <td>0.002000</td>
+      <td>47.107664</td>
+      <td>22.526916</td>
+      <td>0.004176</td>
+      <td>14.743823</td>
+      <td>13.399772</td>
+      <td>1020.824361</td>
+      <td>43.175639</td>
+      <td>2.118609</td>
+      <td>90.679745</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:20:00</th>
+      <td>21.607811</td>
+      <td>777.222786</td>
+      <td>42.713881</td>
+      <td>149817.253731</td>
+      <td>71.577612</td>
+      <td>1.0</td>
+      <td>0.218984</td>
+      <td>2.307573</td>
+      <td>0.032434</td>
+      <td>0.206283</td>
+      <td>0.002000</td>
+      <td>49.302920</td>
+      <td>23.075730</td>
+      <td>0.004359</td>
+      <td>14.549909</td>
+      <td>13.191223</td>
+      <td>1020.641423</td>
+      <td>43.358577</td>
+      <td>1.648458</td>
+      <td>70.556569</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:30:00</th>
+      <td>21.538950</td>
+      <td>777.266600</td>
+      <td>47.500900</td>
+      <td>134899.510000</td>
+      <td>112.599500</td>
+      <td>1.0</td>
+      <td>0.226119</td>
+      <td>2.362454</td>
+      <td>0.033166</td>
+      <td>0.205917</td>
+      <td>0.002000</td>
+      <td>51.498175</td>
+      <td>23.624544</td>
+      <td>0.004542</td>
+      <td>14.355995</td>
+      <td>12.982673</td>
+      <td>1020.458485</td>
+      <td>43.541515</td>
+      <td>1.178307</td>
+      <td>50.433394</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:40:00</th>
+      <td>21.536716</td>
+      <td>777.252736</td>
+      <td>44.678806</td>
+      <td>139608.238806</td>
+      <td>115.494527</td>
+      <td>1.0</td>
+      <td>0.233254</td>
+      <td>2.417336</td>
+      <td>0.033898</td>
+      <td>0.205551</td>
+      <td>0.002000</td>
+      <td>53.693431</td>
+      <td>24.173358</td>
+      <td>0.004724</td>
+      <td>14.162080</td>
+      <td>12.774124</td>
+      <td>1020.275547</td>
+      <td>43.724453</td>
+      <td>0.708157</td>
+      <td>30.310219</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:40:00</th>
+      <td>26.107350</td>
+      <td>783.207700</td>
+      <td>55.989000</td>
+      <td>919791.035000</td>
+      <td>134.245000</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>15.763391</td>
+      <td>15.764222</td>
+      <td>1016.668623</td>
+      <td>90.775170</td>
+      <td>1.781594</td>
+      <td>282.987338</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:50:00</th>
+      <td>26.044627</td>
+      <td>782.988358</td>
+      <td>56.206169</td>
+      <td>917950.154229</td>
+      <td>135.905473</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>15.352236</td>
+      <td>15.299815</td>
+      <td>1017.040148</td>
+      <td>90.279802</td>
+      <td>1.873237</td>
+      <td>301.687461</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:00:00</th>
+      <td>25.976800</td>
+      <td>782.816100</td>
+      <td>56.356400</td>
+      <td>919481.515000</td>
+      <td>135.027000</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>14.941081</td>
+      <td>14.835408</td>
+      <td>1017.411674</td>
+      <td>89.784435</td>
+      <td>1.964880</td>
+      <td>320.387585</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:10:00</th>
+      <td>25.887463</td>
+      <td>782.811542</td>
+      <td>56.562438</td>
+      <td>921179.353234</td>
+      <td>134.278607</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>14.529926</td>
+      <td>14.371001</td>
+      <td>1017.783200</td>
+      <td>89.289067</td>
+      <td>2.056523</td>
+      <td>339.087708</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:20:00</th>
+      <td>25.836471</td>
+      <td>782.932941</td>
+      <td>56.662941</td>
+      <td>922768.882353</td>
+      <td>133.876471</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>14.306405</td>
+      <td>14.118530</td>
+      <td>1017.985176</td>
+      <td>89.019765</td>
+      <td>2.106343</td>
+      <td>349.253860</td>
+    </tr>
+  </tbody>
+</table>
+<p>31364 rows × 20 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="15-Minute-Resampling">15 Minute Resampling<a class="anchor-link" href="#15-Minute-Resampling">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">df_15min</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">df2</span><span class="o">.</span>
+  <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;15min&#39;</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df_15min</span> <span class="o">=</span> <span class="n">df_15min</span><span class="p">[</span><span class="o">~</span><span class="n">df_15min</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">df_15min</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_15min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_15min.pickle.gz&#39;</span><span class="p">)</span>
+<span class="n">df_15min</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 660 ms, sys: 94.9 ms, total: 755 ms
+Wall time: 754 ms
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>NO</th>
+      <th>CO</th>
+      <th>NO2</th>
+      <th>NOx</th>
+      <th>O3</th>
+      <th>PM10</th>
+      <th>PM2.5</th>
+      <th>SO2</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:00:00</th>
+      <td>21.607150</td>
+      <td>777.335959</td>
+      <td>43.143316</td>
+      <td>150053.414508</td>
+      <td>59.465803</td>
+      <td>1.0</td>
+      <td>0.208416</td>
+      <td>2.226277</td>
+      <td>0.031350</td>
+      <td>0.206825</td>
+      <td>0.002000</td>
+      <td>46.051095</td>
+      <td>22.262774</td>
+      <td>0.004088</td>
+      <td>14.837153</td>
+      <td>13.500146</td>
+      <td>1020.912409</td>
+      <td>43.087591</td>
+      <td>2.344891</td>
+      <td>100.364964</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:15:00</th>
+      <td>21.593223</td>
+      <td>777.238140</td>
+      <td>42.710631</td>
+      <td>150175.980066</td>
+      <td>69.657475</td>
+      <td>1.0</td>
+      <td>0.217205</td>
+      <td>2.293887</td>
+      <td>0.032252</td>
+      <td>0.206374</td>
+      <td>0.002000</td>
+      <td>48.755474</td>
+      <td>22.938869</td>
+      <td>0.004313</td>
+      <td>14.598266</td>
+      <td>13.243230</td>
+      <td>1020.687044</td>
+      <td>43.312956</td>
+      <td>1.765703</td>
+      <td>75.574818</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:30:00</th>
+      <td>21.541993</td>
+      <td>777.262924</td>
+      <td>46.587375</td>
+      <td>136444.478405</td>
+      <td>112.892691</td>
+      <td>1.0</td>
+      <td>0.227916</td>
+      <td>2.376277</td>
+      <td>0.033350</td>
+      <td>0.205825</td>
+      <td>0.002000</td>
+      <td>52.051095</td>
+      <td>23.762774</td>
+      <td>0.004588</td>
+      <td>14.307153</td>
+      <td>12.930146</td>
+      <td>1020.412409</td>
+      <td>43.587591</td>
+      <td>1.059891</td>
+      <td>45.364964</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:45:00</th>
+      <td>21.505050</td>
+      <td>777.272093</td>
+      <td>44.306312</td>
+      <td>141370.046512</td>
+      <td>109.778405</td>
+      <td>1.0</td>
+      <td>0.238627</td>
+      <td>2.458668</td>
+      <td>0.034449</td>
+      <td>0.205276</td>
+      <td>0.002000</td>
+      <td>55.346715</td>
+      <td>24.586679</td>
+      <td>0.004862</td>
+      <td>14.016040</td>
+      <td>12.617062</td>
+      <td>1020.137774</td>
+      <td>43.862226</td>
+      <td>0.354078</td>
+      <td>15.155109</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 07:00:00</th>
+      <td>21.335133</td>
+      <td>777.231133</td>
+      <td>43.786767</td>
+      <td>146254.326667</td>
+      <td>88.569333</td>
+      <td>1.0</td>
+      <td>0.231821</td>
+      <td>2.388155</td>
+      <td>0.034379</td>
+      <td>0.190584</td>
+      <td>0.002249</td>
+      <td>58.242727</td>
+      <td>25.994181</td>
+      <td>0.004751</td>
+      <td>13.738271</td>
+      <td>12.324543</td>
+      <td>1020.000000</td>
+      <td>44.372818</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:15:00</th>
+      <td>26.295914</td>
+      <td>782.908738</td>
+      <td>55.281462</td>
+      <td>927031.076412</td>
+      <td>128.179070</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>16.687208</td>
+      <td>16.807690</td>
+      <td>1015.833848</td>
+      <td>91.888203</td>
+      <td>1.575683</td>
+      <td>240.970352</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:30:00</th>
+      <td>26.183000</td>
+      <td>783.176733</td>
+      <td>55.732867</td>
+      <td>921393.526667</td>
+      <td>132.783333</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>16.070988</td>
+      <td>16.111658</td>
+      <td>1016.390673</td>
+      <td>91.145769</td>
+      <td>1.713033</td>
+      <td>268.997221</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:45:00</th>
+      <td>26.054252</td>
+      <td>783.056545</td>
+      <td>56.168405</td>
+      <td>918341.003322</td>
+      <td>135.632890</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>15.454768</td>
+      <td>15.415627</td>
+      <td>1016.947498</td>
+      <td>90.403335</td>
+      <td>1.850383</td>
+      <td>297.024089</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:00:00</th>
+      <td>25.956233</td>
+      <td>782.804800</td>
+      <td>56.408033</td>
+      <td>919933.010000</td>
+      <td>134.746000</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>14.838548</td>
+      <td>14.719595</td>
+      <td>1017.504324</td>
+      <td>89.660902</td>
+      <td>1.987733</td>
+      <td>325.050957</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:15:00</th>
+      <td>25.856695</td>
+      <td>782.853898</td>
+      <td>56.620254</td>
+      <td>921699.330508</td>
+      <td>134.300847</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>14.409963</td>
+      <td>14.235500</td>
+      <td>1017.891600</td>
+      <td>89.144534</td>
+      <td>2.083261</td>
+      <td>344.543854</td>
+    </tr>
+  </tbody>
+</table>
+<p>20909 rows × 20 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="30-Minute-Resampling">30 Minute Resampling<a class="anchor-link" href="#30-Minute-Resampling">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">df_30min</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">df2</span><span class="o">.</span>
+  <span class="n">resample</span><span class="p">(</span><span class="s1">&#39;30min&#39;</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df_30min</span> <span class="o">=</span> <span class="n">df_30min</span><span class="p">[</span><span class="o">~</span><span class="n">df_30min</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">df_30min</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;hour&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_30min</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/data_30min.pickle.gz&#39;</span><span class="p">)</span>
+<span class="n">df_30min</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 559 ms, sys: 95 ms, total: 654 ms
+Wall time: 653 ms
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperature</th>
+      <th>pressure</th>
+      <th>humidity</th>
+      <th>gasResistance</th>
+      <th>IAQ</th>
+      <th>iaqAccuracy</th>
+      <th>NO</th>
+      <th>CO</th>
+      <th>NO2</th>
+      <th>NOx</th>
+      <th>O3</th>
+      <th>PM10</th>
+      <th>PM2.5</th>
+      <th>SO2</th>
+      <th>temperature_outdoor</th>
+      <th>feels_like</th>
+      <th>pressure_outdoor</th>
+      <th>humidity_outdoor</th>
+      <th>wind_speed</th>
+      <th>wind_deg</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-12 06:00:00</th>
+      <td>21.598664</td>
+      <td>777.276356</td>
+      <td>42.879676</td>
+      <td>1.501281e+05</td>
+      <td>65.675709</td>
+      <td>1.0</td>
+      <td>0.213771</td>
+      <td>2.267473</td>
+      <td>0.031900</td>
+      <td>0.206550</td>
+      <td>0.002000</td>
+      <td>47.698905</td>
+      <td>22.674726</td>
+      <td>0.004225</td>
+      <td>14.691597</td>
+      <td>13.343604</td>
+      <td>1020.775091</td>
+      <td>43.224909</td>
+      <td>1.991984</td>
+      <td>85.260036</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 06:30:00</th>
+      <td>21.523522</td>
+      <td>777.267508</td>
+      <td>45.446844</td>
+      <td>1.389073e+05</td>
+      <td>111.335548</td>
+      <td>1.0</td>
+      <td>0.233271</td>
+      <td>2.417473</td>
+      <td>0.033900</td>
+      <td>0.205550</td>
+      <td>0.002000</td>
+      <td>53.698905</td>
+      <td>24.174726</td>
+      <td>0.004725</td>
+      <td>14.161597</td>
+      <td>12.773604</td>
+      <td>1020.275091</td>
+      <td>43.724909</td>
+      <td>0.706984</td>
+      <td>30.260036</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 07:00:00</th>
+      <td>21.285807</td>
+      <td>777.166356</td>
+      <td>43.516739</td>
+      <td>1.476645e+05</td>
+      <td>84.998336</td>
+      <td>1.0</td>
+      <td>0.219561</td>
+      <td>2.275561</td>
+      <td>0.033753</td>
+      <td>0.176072</td>
+      <td>0.002499</td>
+      <td>59.493766</td>
+      <td>26.995012</td>
+      <td>0.004501</td>
+      <td>13.605661</td>
+      <td>12.188180</td>
+      <td>1020.000000</td>
+      <td>44.748130</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 07:30:00</th>
+      <td>21.021811</td>
+      <td>776.989535</td>
+      <td>42.850565</td>
+      <td>1.518114e+05</td>
+      <td>78.670100</td>
+      <td>1.0</td>
+      <td>0.170561</td>
+      <td>1.825561</td>
+      <td>0.031253</td>
+      <td>0.118072</td>
+      <td>0.003499</td>
+      <td>64.493766</td>
+      <td>30.995012</td>
+      <td>0.003501</td>
+      <td>13.075661</td>
+      <td>11.643180</td>
+      <td>1020.000000</td>
+      <td>46.248130</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2021-02-12 08:00:00</th>
+      <td>20.750449</td>
+      <td>776.791229</td>
+      <td>42.674053</td>
+      <td>1.536451e+05</td>
+      <td>81.092525</td>
+      <td>1.0</td>
+      <td>0.134260</td>
+      <td>1.575021</td>
+      <td>0.032248</td>
+      <td>0.084754</td>
+      <td>0.005998</td>
+      <td>62.753533</td>
+      <td>31.751039</td>
+      <td>0.002750</td>
+      <td>12.315411</td>
+      <td>10.865420</td>
+      <td>1019.750208</td>
+      <td>48.498753</td>
+      <td>0.384680</td>
+      <td>14.987531</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 23:00:00</th>
+      <td>26.241714</td>
+      <td>782.198103</td>
+      <td>53.698003</td>
+      <td>1.013392e+06</td>
+      <td>66.757238</td>
+      <td>1.0</td>
+      <td>0.009208</td>
+      <td>0.770925</td>
+      <td>0.027979</td>
+      <td>0.039159</td>
+      <td>0.015659</td>
+      <td>20.597295</td>
+      <td>16.656760</td>
+      <td>0.001368</td>
+      <td>17.632842</td>
+      <td>17.844994</td>
+      <td>1015.281611</td>
+      <td>91.842268</td>
+      <td>1.472006</td>
+      <td>202.160297</td>
+    </tr>
+    <tr>
+      <th>2021-09-17 23:30:00</th>
+      <td>26.321860</td>
+      <td>781.936711</td>
+      <td>54.365880</td>
+      <td>9.703531e+05</td>
+      <td>95.548007</td>
+      <td>1.0</td>
+      <td>0.009185</td>
+      <td>0.767123</td>
+      <td>0.027877</td>
+      <td>0.039082</td>
+      <td>0.015423</td>
+      <td>20.402159</td>
+      <td>16.479936</td>
+      <td>0.001326</td>
+      <td>17.617627</td>
+      <td>17.848328</td>
+      <td>1015.094026</td>
+      <td>92.613448</td>
+      <td>1.404058</td>
+      <td>200.055182</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:00:00</th>
+      <td>26.327471</td>
+      <td>782.591181</td>
+      <td>55.042629</td>
+      <td>9.334957e+05</td>
+      <td>123.341764</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>16.994805</td>
+      <td>17.155127</td>
+      <td>1015.555899</td>
+      <td>92.258802</td>
+      <td>1.507122</td>
+      <td>226.980235</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 00:30:00</th>
+      <td>26.118519</td>
+      <td>783.116539</td>
+      <td>55.950998</td>
+      <td>9.198647e+05</td>
+      <td>134.210483</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>15.762366</td>
+      <td>15.763064</td>
+      <td>1016.669549</td>
+      <td>90.773935</td>
+      <td>1.781822</td>
+      <td>283.033972</td>
+    </tr>
+    <tr>
+      <th>2021-09-18 01:00:00</th>
+      <td>25.928134</td>
+      <td>782.818660</td>
+      <td>56.467943</td>
+      <td>9.204316e+05</td>
+      <td>134.620335</td>
+      <td>1.0</td>
+      <td>0.009174</td>
+      <td>0.765217</td>
+      <td>0.027826</td>
+      <td>0.039043</td>
+      <td>0.015304</td>
+      <td>20.304348</td>
+      <td>16.391304</td>
+      <td>0.001304</td>
+      <td>14.717560</td>
+      <td>14.582937</td>
+      <td>1017.613650</td>
+      <td>89.515133</td>
+      <td>2.014700</td>
+      <td>330.553737</td>
+    </tr>
+  </tbody>
+</table>
+<p>10455 rows × 20 columns</p>
 </div>
 </div>
 
