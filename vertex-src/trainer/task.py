@@ -38,7 +38,7 @@ def train_model(model, train_data,  validation_data,
                       epochs=epochs, steps_per_epoch=steps_per_epoch, 
                       batch_size=batch_size, verbose=verbose, callbacks=[cbk])
   tiempo = time.time() - tiempo
-  logging.info(f"Processing Time: {tiempo:.2f} segundos.")
+  logging.info(f"Processing Time: {tiempo:.2f} seconds.")
 
   #### Start Section: Save the Model
   base_dir = os.path.join(output_datastore, model.name)
