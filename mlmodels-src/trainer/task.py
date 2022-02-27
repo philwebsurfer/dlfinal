@@ -91,7 +91,7 @@ def train_model(x_train, y_train,
 
 def execute_train(window_size_days=2, stride=1, sampling_rate=1, 
         batch_size=128, kernel="rbf", degree=3, coef0=.0, regularization=1.,
-        input_dataset="", output_datastore=""):
+        njobs=1, input_dataset="", output_datastore=""):
   # Data Prep
   logging.info(f'Loading input dataset: {input_dataset}')
   data =  pd.read_pickle(input_dataset)
@@ -117,6 +117,10 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
 
   timedelta_minutes = (data.index[-1] - data.index[-2]).seconds//60
   past = int(window_size_days) * 24 * 60 // timedelta_minutes
+  past = 240
+  stride = 30
+  sampling_rate = 1
+  batch_size = 1
   train3_iaq = tf.keras.preprocessing.timeseries_dataset_from_array(
     X_train, 
     Y_train[:, 1],
@@ -148,7 +152,11 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
     y_train.append(y_batch)
   
   # Convert into numpy array
-  x_train = np.array(x_train).reshape(-1, past, X.shape[1])
+  logging.debug(f"x_train.shape = {np.array(x_train).shape}")
+  logging.debug(f"y_train.shape = {np.array(y_train).shape}")
+  logging.debug(f"train2.shape = {train2.shape}")
+  x_train = np.array(x_train).reshape(x_train.shape[0],
+        -1, past, train2.shape[1])
   y_train = np.array(y_train).reshape(-1, 1)
   logging.info("... Done training data!")
   logging.info("... for test data...")
@@ -158,9 +166,11 @@ def execute_train(window_size_days=2, stride=1, sampling_rate=1,
     x_batch, y_batch = batch
     x_test.append(x_batch)
     y_test.append(y_batch)
-  
+  logging.debug(f"x_test.shape =  {np.array(x_test).shape}")
+  logging.debug(f"y_test.shape =  {np.array(x_test).shape}")
+  logging.debug(f"test2.shape =  {test2.shape}")
   # Convert into numpy array
-  x_test = np.array(x_test).reshape(-1, past, X.shape[1])
+  x_test = np.array(x_test).reshape(-1, past, test2.shape[1])
   y_test = np.array(y_test).reshape(-1, 1)
   logging.info("... Done validation data!")
   logging.info(f'Done converting time series tensor into a multivariate ts format!')
@@ -243,13 +253,18 @@ def main(argv):
     #print(args)
 
     ## Google Environment
-    if 'AIP_MODEL_DIR' not in os.environ:
-        raise KeyError(
-            'The `AIP_MODEL_DIR` environment variable has not been' +
-            'set. See https://cloud.google.com/ai-platform-unified/docs/tutorials/image-recognition-custom/training'
-        )
+    #if 'AIP_MODEL_DIR' not in os.environ:
+    #    raise KeyError(
+    #        'The `AIP_MODEL_DIR` environment variable has not been' +
+    #        'set. See https://cloud.google.com/ai-platform-unified/docs/tutorials/image-recognition-custom/training'
+    #    )
     output_dir = args.output_datastore[0].strip()
-    model_file = args.model[0].strip()
+    #model_file = args.model[0].strip()
+
+    logging.basicConfig()
+    if args.debug or True:
+        logging.getLogger().setLevel(logging.DEBUG)
+    logging.StreamHandler(sys.stdout)
     
     execute_train(window_size_days=args.window_size_days, 
             batch_size=int(args.batch_size),
@@ -257,7 +272,7 @@ def main(argv):
             sampling_rate=args.sampling_rate,
             kernel=args.kernel,
             degree=int(args.degree),
-            coef0=float(args.coef),
+            coef0=float(args.coef0),
             regularization=float(args.regularization),
             njobs=int(args.njobs),
             input_dataset=args.input_dataset[0],
