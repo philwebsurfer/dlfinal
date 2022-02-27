@@ -5,3 +5,5 @@ Written in LaTex using guidelines from [Mexican Conference on Pattern Recognitio
 [LNCS guidelines](https://www.springer.com/la/computer-science/lncs/conference-proceedings-guidelines).
 
 * Source file: [main.tex](https://github.com/philwebsurfer/dlfinal/blob/main/paper/main.tex).
+
+* Rendered file [pdf](https://philwebsurfer.github.io/dlfinal/paper.pdf).
