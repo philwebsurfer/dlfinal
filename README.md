@@ -6,7 +6,7 @@ _Professor: Dr. Edgar Francisco Román-Rangel._
 
 # Paper
 
-* Paper [[pdf]](https://philwebsurfer.github.io/dlfinal/paper.pdf)
+* Paper [doi:10.1007/978-3-031-07750-0_12](https://doi.org/10.1007/978-3-031-07750-0_12)
 * [Presentation](https://youtu.be/K31aqZIgwu8)
 * Presentation Slides [[pdf]](https://philwebsurfer.github.io/dlfinal/presentation.pdf)
 
