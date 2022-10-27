@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+title: >-
+  Indoor Air Pollution Forecasting Using Deep Neural
+  Networks.
+message: >-
+  Atmospheric pollution components have negative
+  effects in the health and life of people. Outdoor
+  pollution has been extensively studied, but a large
+  portion of people stay indoors. Our research
+  focuses on indoor pollution forecasting using deep
+  learning techniques coupled with the large
+  processing capabilities of the cloud computing.
+  This paper also shares the implementation using an
+  open source approach of the code for modeling
+  time-series of different sources data. We believe
+  that further research can leverage the outcomes of
+  our research.
+repository-code: "https://github.com/philwebsurfer/dliaq"
+url: "https://philwebsurfer.github.io/dlfinal/"
+doi: 10.1007/978-3-031-07750-0_12
+date-released: 2022-06-11
+license: GPL-3.0
+keywords:
+  - "Deep Learning"
+  - "Artificial Neural Networks"
+  - "Indoor Air Quality Forecasting"
+  - "Cloud Computing"
+preferred-citation:
+  type: conference-paper
+  authors:
+  - given-names: Jorge III
+    family-names: Altamirano-Astorga
+    email: jaltami9@itam.mx
+    affiliation: Instituto Tecnologico Autonomo de Mexico
+  - given-names: Ita-Andehui
+    email: isantia2@itam.mx
+    family-names: ' Santiago-Castillejos'
+    affiliation: 'Instituto Tecnologico Autonomo de Mexico '
+  - email: lhern123@itam.mx
+    given-names: Luz
+    family-names: Hernández-Martínez
+    affiliation: 'Instituto Tecnologico Autonomo de Mexico '
+  - email: edgar.roman@itam.mx
+    given-names: Edgar Francisco
+    family-names: Roman-Rangel
+    affiliation: Instituto Tecnologico Autonomo de Mexico
+  doi: 10.1007/978-3-031-07750-0_12
+  journal: "MCPR 2022"
+  start: 127
+  end: 136
+  title: "Indoor Air Pollution Forecasting Using Deep Neural Networks"
+  booktitle: "Pattern Recognition"
+  year: 2022
+  publsher: 
+    name: "Springer International Publishing"
+
